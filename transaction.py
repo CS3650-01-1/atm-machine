@@ -12,8 +12,8 @@ class Transaction:
         self.account = account
 
     def save(self):
-        # logic for recording into database eventually
         print("Saved Transaction:\n%s" % self)
+        #TODO: logic for recording into database eventually
 
     def __str__(self):  # something to print for future debugging
         # buncha objects so cant print until other str methods are done
