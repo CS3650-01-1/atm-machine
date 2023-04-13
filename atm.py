@@ -16,13 +16,13 @@ class ATM:
     def authenticate_pin(card_number, pin) -> bool:
         pass
 
-    def deposit_cash(amount) -> Transaction:
+    def deposit_cash(amount, account_number) -> Transaction:
         pass
 
-    def deposit_check(amount) -> Transaction:
+    def deposit_check(amount, account_number) -> Transaction:
         pass
 
-    def withdraw_cash(amount) -> Transaction:
+    def withdraw_cash(amount, account_number) -> Transaction:
         # deny withdrawal if not enough balance
         pass
 
@@ -30,6 +30,6 @@ class ATM:
         # deny transfer if not enough balance
         pass
 
-    def check_balance():
+    def check_balance(account_number):
         pass
 
