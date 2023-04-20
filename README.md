@@ -4,5 +4,5 @@ ATM Machine is a machine that users can use to access their accounts (savings/ch
 
 ## Requirements
 
-The project uses **SQLite** as its DBMS and **peewee** as an ORM. SQLite can be installed with **chocolatey** package manager or manually through the downloads on SQLite (make sure to add it to your PATH). peewee and future potential packages can be installed with
+The project uses **SQLite** as its DBMS and **peewee** as an ORM. There is no need to download SQLite because it comes bundled with Python 3. On the other hand, peewee and future potential packages can be installed with
 ```pip install -r reqs.txt```
