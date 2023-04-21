@@ -21,6 +21,7 @@ class Account:
         connection.commit()
 
     #"read"
+    # unsure of how necessary the staticmethod annotation is
     @staticmethod
     def retrieve(accountNum):
         connection = sqlite3.connect(DATABASE)
@@ -36,6 +37,7 @@ class Account:
         connection.commit()
 
     #"delete"
+    # ...probably not necessary? but it is here for completion's sake anyway
     def delete_from_db(self):
         connection = sqlite3.connect(DATABASE)
         cursor = connection.cursor()
@@ -46,7 +48,69 @@ class Account:
         return f"Account ID: {self.accountNum}"
 
 class Savings:
-    pass
+    def __init__(self,savingsID,accountNum,accountBalance):
+        self.savingsID = savingsID
+        self.accountNum = accountNum
+        self.accountBalance = accountBalance
+    
+    def create_in_db(self):
+        connection = sqlite3.connect(DATABASE)
+        cursor = connection.cursor()
+        cursor.execute("INSERT OR ABORT INTO SAVING VALUES(?, ?, ?)", (self.savingsID, self.accountNum, self.accountBalance))
+        connection.commit()
+
+    @staticmethod
+    def retrieve(savingsID):
+        connection = sqlite3.connect(DATABASE)
+        cursor = connection.cursor()
+        data = cursor.execute("SELECT savingID, accountNum, accountBalance FROM SAVING WHERE savingID = ?",[savingsID]).fetchone()
+        return Savings(data[0],data[1],data[2])
+
+    def update_db(self):
+        connection = sqlite3.connect(DATABASE)
+        cursor = connection.cursor()
+        cursor.execute("INSERT OR REPLACE INTO SAVING VALUES(?, ?, ?)", (self.savingsID, self.accountNum, self.accountBalance))
+        connection.commit()
+
+    def delete_from_db(self):
+        connection = sqlite3.connect(DATABASE)
+        cursor = connection.cursor()
+        cursor.execute("DELETE FROM SAVING WHERE savingID = ?", [self.savingsID])
+        connection.commit()
+
+    def __str__(self) -> str:
+        return f"Savings ID: {self.savingsID}, master account number: {self.accountNum}, balance: {self.accountBalance}"
 
 class Checking:
-    pass
+    def __init__(self,checkingID,accountNum,accountBalance):
+        self.checkingID = checkingID
+        self.accountNum = accountNum
+        self.accountBalance = accountBalance
+    
+    def create_in_db(self):
+        connection = sqlite3.connect(DATABASE)
+        cursor = connection.cursor()
+        cursor.execute("INSERT OR ABORT INTO CHECKING VALUES(?, ?, ?)", (self.checkingID, self.accountNum, self.accountBalance))
+        connection.commit()
+
+    @staticmethod
+    def retrieve(checkingID):
+        connection = sqlite3.connect(DATABASE)
+        cursor = connection.cursor()
+        data = cursor.execute("SELECT checkingID, accountNum, accountBalance FROM CHECKING WHERE checkingID = ?",[checkingID]).fetchone()
+        return Checking(data[0],data[1],data[2])
+
+    def update_db(self):
+        connection = sqlite3.connect(DATABASE)
+        cursor = connection.cursor()
+        cursor.execute("INSERT OR REPLACE INTO CHECKING VALUES(?, ?, ?)", (self.checkingID, self.accountNum, self.accountBalance))
+        connection.commit()
+
+    def delete_from_db(self):
+        connection = sqlite3.connect(DATABASE)
+        cursor = connection.cursor()
+        cursor.execute("DELETE FROM CHECKING WHERE checkingID = ?", [self.checkingID])
+        connection.commit()
+
+    def __str__(self) -> str:
+        return f"Checking ID: {self.checkingID}, master account number: {self.accountNum}, balance: {self.accountBalance}"
