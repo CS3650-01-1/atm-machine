@@ -2,6 +2,7 @@
 class representing the ATM interface; all actions that the user can do are done through this class
 '''
 from transaction import Transaction
+DATABASE = "atm.db"
 
 class ATM:
     def __init__(self, location, card_available):
