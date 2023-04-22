@@ -40,10 +40,10 @@ class ATM:
         connection.commit()
 
     def authenticate_pin(account_number, pin) -> bool:
-        Account
-        if data is None:
-            return False
-        return True
+        account = Account.retrieve(account_number)
+        if account[0] == pin:
+            return True
+        return False
 
     def deposit_cash(self, amount, account_number, account_type):
         if account_type == "checking":
@@ -57,12 +57,30 @@ class ATM:
         self.cash_available += amount
         self.update_db()
 
+    # we can probably get rid of this and just make a catch-all deposit method
     def deposit_check(amount, account_number, account_type):
-        pass
+        if account_type == "checking":
+            account = Checking.retrieve(account_number)
+            account.addBalance(amount)
+            account.update_db()
+        elif account_type == "savings":
+            account = Savings.retrieve(account_number)
+            account.addBalance(amount)
+            account.update_db()
 
-    def withdraw_cash(amount, account_number, account_type):
+    def withdraw_cash(self, amount, account_number, account_type):
         # deny withdrawal if not enough balance
-        pass
+        if account_type == "checking":
+            account = Checking.retrieve(account_number)
+            account.removeBalance(amount)
+            account.update_db()
+        elif account_type == "savings":
+            account = Savings.retrieve(account_number)
+            account.removeBalance(amount)
+            account.update_db()
+        self.cash_available -= amount
+        self.update_db()
+
 
     def transfer_balance(amount, account_number):
         # deny transfer if not enough balance
