@@ -4,7 +4,7 @@ class representing the ATM interface; all actions that the user can do are done 
 import sqlite3
 from sqlite3 import Error
 
-from account import Checking, Savings
+from account import *
 
 DATABASE = "atm.db"
 
@@ -40,11 +40,7 @@ class ATM:
         connection.commit()
 
     def authenticate_pin(account_number, pin) -> bool:
-        # check database for matching acc number and pin
-        connection = sqlite3.connect(DATABASE)
-        cursor = connection.cursor()
-        data = cursor.execute("SELECT * FROM ACCOUNTS WHERE accountNum = ? AND pin = ?", [account_number, pin]).fetchone()
-        connection.close()
+        Account
         if data is None:
             return False
         return True
