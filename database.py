@@ -1,4 +1,3 @@
-from peewee import *
 import sqlite3
 
 conn = sqlite3.connect('atm.db')
