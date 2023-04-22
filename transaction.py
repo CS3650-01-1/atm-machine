@@ -1,15 +1,54 @@
 from datetime import datetime
+from atm import DATABASE
+import sqlite3, secrets
 
 '''
 class representing the log of a transaction
 '''
 class Transaction:
-    def __init__(self, type, amount, transaction_id, account):
+    def __init__(self, type, amount, account, transaction_id=None, date=None):
         self.type = type
-        self.date = datetime.now    # log datetime on init
+        self.date = date or datetime.now()    # log datetime on init
         self.amount = amount
-        self.transaction_id = transaction_id
+        self.transaction_id = transaction_id or self.generate_id()
         self.account = account
+
+    def generate_id(self):
+        connection = sqlite3.connect(DATABASE)
+        cursor = connection.cursor()
+        while True:
+            gen_id = secrets.randbelow(100000)  # generate int from 0 to 99999
+            id = int(str(gen_id).zfill(5))  # pads 0's if not 5 digits
+            data = cursor.execute("SELECT transaction_id FROM Transactions WHERE transaction_id = ?",[id]).fetchone()
+            if not data:
+                return id
+
+    def create_in_db(self):
+        connection = sqlite3.connect(DATABASE)
+        cursor = connection.cursor()
+        cursor.execute("INSERT OR ABORT INTO Transactions VALUES(?, ?, ?, ?, ?)", (self.transaction_id, self.account,self.type, self.date, self.amount))
+        connection.commit()
+
+    @staticmethod
+    def retrieve(transaction_id):
+        connection = sqlite3.connect(DATABASE)
+        cursor = connection.cursor()
+        data = cursor.execute("SELECT * FROM Transactions WHERE transactionID = ?",[transaction_id]).fetchone()
+        if data:
+            return Transaction(data[2], data[4], data[1], transaction_id=data[0], date=data[3])
+        return None
+    
+    def update_db(self):
+        connection = sqlite3.connect(DATABASE)
+        cursor = connection.cursor()
+        cursor.execute("INSERT OR REPLACE INTO Transactions VALUES (?, ?, ?, ?, ?)", (self.transaction_id, self.account, self.type, self.date, self.amount))
+        connection.commit()
+
+    def delete_from_db(self):
+        connection = sqlite3.connect(DATABASE)
+        cursor = connection.cursor()
+        cursor.execute("DELETE FROM Transactions WHERE transactionID = ?)",[self.transaction_id])
+        connection.commit()
 
     def save(self):
         print("Saved Transaction:\n%s" % self)
