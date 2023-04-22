@@ -1,6 +1,7 @@
 from datetime import datetime
-from atm import DATABASE
 import sqlite3, secrets
+
+DATABASE = "atm.db"
 
 '''
 class representing the log of a transaction

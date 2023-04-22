@@ -4,7 +4,8 @@ class representing a bank account; its transaction log is done through database 
 
 import sqlite3, secrets
 from sqlite3 import Error
-from atm import DATABASE
+
+DATABASE = "atm.db"
 
 class Account:
     # probably irrelevant
@@ -98,6 +99,18 @@ class Savings:
         cursor.execute("DELETE FROM SAVING WHERE savingID = ?", [self.savingsID])
         connection.commit()
 
+    def addBalance(self, amount):
+        self.accountBalance += amount
+        self.update_db()
+
+    def removeBalance(self, amount):
+        if self.accountBalance >= amount:
+            self.accountBalance -= amount
+            self.update_db()
+        else:
+            print("Insufficient funds")
+
+
     def __str__(self) -> str:
         return f"Savings ID: {self.savingsID}, master account number: {self.accountNum}, balance: {self.accountBalance}"
 
@@ -141,6 +154,17 @@ class Checking:
         cursor = connection.cursor()
         cursor.execute("DELETE FROM CHECKING WHERE checkingID = ?", [self.checkingID])
         connection.commit()
+
+    def addBalance(self, amount):
+        self.accountBalance += amount
+        self.update_db()
+
+    def removeBalance(self, amount):
+        if self.accountBalance >= amount:
+            self.accountBalance -= amount
+            self.update_db()
+        else:
+            print("Insufficient funds")
 
     def __str__(self) -> str:
         return f"Checking ID: {self.checkingID}, master account number: {self.accountNum}, balance: {self.accountBalance}"

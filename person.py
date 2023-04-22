@@ -4,7 +4,8 @@ class representing a person; acts as a "master" account to multiple bank account
 
 import secrets
 import sqlite3
-from atm import DATABASE
+
+DATABASE = "atm.db"
 
 class Person:
     def __init__(self, first_name, last_name, email_address, telephone_number, physical_address, id=None):
