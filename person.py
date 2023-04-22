@@ -20,7 +20,7 @@ class Person:
         cursor = connection.cursor()
         while True:
             gen_id = secrets.randbelow(100000)  # generate int from 0 to 99999
-            id = int(str(gen_id).zfill(5))  # pads 0's if not 5 digits
+            id = int(str(gen_id).rjust(5, '0')[:5])
             data = cursor.execute("SELECT personID FROM PERSON WHERE personID = ?",[id]).fetchone()
             if not data:
                 return id

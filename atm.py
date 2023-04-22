@@ -1,7 +1,6 @@
 '''
 class representing the ATM interface; all actions that the user can do are done through this class
 '''
-from transaction import Transaction
 import sqlite3
 from sqlite3 import Error
 
@@ -38,25 +37,25 @@ class ATM:
         cursor.execute("DELETE FROM ATM WHERE atmID = ?", [self.atm_id])
         connection.commit()
 
-    def create_transaction(self, type,amount, account_number):
-        id = "0000000"  # VERY TEMP, need to figure out ID generation
-        transaction = Transaction(type, amount, id, account_number)
-        transaction.save()
+    # def create_transaction(self, type,amount, account_number):
+    #     id = "0000000"  # VERY TEMP, need to figure out ID generation
+    #     transaction = Transaction(type, amount, id, account_number)
+    #     transaction.save()
 
     def authenticate_pin(card_number, pin) -> bool:
         pass
 
-    def deposit_cash(amount, account_number) -> Transaction:
+    def deposit_cash(amount, account_number):
         pass
 
-    def deposit_check(amount, account_number) -> Transaction:
+    def deposit_check(amount, account_number):
         pass
 
-    def withdraw_cash(amount, account_number) -> Transaction:
+    def withdraw_cash(amount, account_number):
         # deny withdrawal if not enough balance
         pass
 
-    def transfer_balance(amount, account_number) -> Transaction:
+    def transfer_balance(amount, account_number):
         # deny transfer if not enough balance
         pass
 
