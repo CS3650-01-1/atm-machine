@@ -102,10 +102,20 @@ class Savings:
         return f"Savings ID: {self.savingsID}, master account number: {self.accountNum}, balance: {self.accountBalance}"
 
 class Checking:
-    def __init__(self,checkingID,accountNum,accountBalance):
-        self.checkingID = checkingID
+    def __init__(self,accountNum,accountBalance, checkingID=None):
+        self.checkingID = checkingID or self.generate_id()
         self.accountNum = accountNum
         self.accountBalance = accountBalance
+
+    def generate_id(self):
+        connection = sqlite3.connect(DATABASE)
+        cursor = connection.cursor()
+        while True:
+            gen_id = secrets.randbelow(100000)  # generate int from 0 to 99999
+            id = int(str(gen_id).rjust(5, '0')[:5]) # fills 0's
+            data = cursor.execute("SELECT checkingID FROM CHECKING WHERE checkingID = ?",[id]).fetchone()
+            if not data:
+                return id
     
     def create_in_db(self):
         connection = sqlite3.connect(DATABASE)
@@ -118,7 +128,7 @@ class Checking:
         connection = sqlite3.connect(DATABASE)
         cursor = connection.cursor()
         data = cursor.execute("SELECT checkingID, accountNum, accountBalance FROM CHECKING WHERE checkingID = ?",[checkingID]).fetchone()
-        return Checking(data[0],data[1],data[2])
+        return Checking(data[1],data[2], checkingID=data[0])
 
     def update_db(self):
         connection = sqlite3.connect(DATABASE)
