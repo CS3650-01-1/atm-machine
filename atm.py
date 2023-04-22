@@ -37,8 +37,15 @@ class ATM:
         cursor.execute("DELETE FROM ATM WHERE atmID = ?", [self.atm_id])
         connection.commit()
 
-    def authenticate_pin(card_number, pin) -> bool:
-        pass
+    def authenticate_pin(account_number, pin) -> bool:
+        # check database for matching acc number and pin
+        connection = sqlite3.connect(DATABASE)
+        cursor = connection.cursor()
+        data = cursor.execute("SELECT * FROM ACCOUNTS WHERE accountNum = ? AND pin = ?", [account_number, pin]).fetchone()
+        connection.close()
+        if data is None:
+            return False
+        return True
 
     def deposit_cash(amount, account_number):
         pass
