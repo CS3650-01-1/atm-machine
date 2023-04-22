@@ -37,11 +37,6 @@ class ATM:
         cursor.execute("DELETE FROM ATM WHERE atmID = ?", [self.atm_id])
         connection.commit()
 
-    # def create_transaction(self, type,amount, account_number):
-    #     id = "0000000"  # VERY TEMP, need to figure out ID generation
-    #     transaction = Transaction(type, amount, id, account_number)
-    #     transaction.save()
-
     def authenticate_pin(card_number, pin) -> bool:
         pass
 

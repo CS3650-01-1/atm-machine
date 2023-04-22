@@ -52,4 +52,4 @@ class Transaction:
 
     def __str__(self):  # something to print for future debugging
         # buncha objects so cant print until other str methods are done
-        return f"Type: {self.type}\nDate: {self.date}\nAmount: {self.amount}\nTransaction ID: {self.transaction_id}\nAccount ID: {self.account.accountNum}"
+        return f"Type: {self.type}\nDate: {self.date}\nAmount: {self.amount}\nTransaction ID: {self.transaction_id}\nAccount ID: {self.account}"

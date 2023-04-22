@@ -2,16 +2,26 @@
 class representing a bank account; its transaction log is done through database relation
 '''
 
-import sqlite3
+import sqlite3, secrets
 from sqlite3 import Error
 from atm import DATABASE
 
 class Account:
     # probably irrelevant
-    def __init__(self, accountNum, pin, ownerID):
-        self.accountNum = accountNum
+    def __init__(self, pin, ownerID, accountNum=None):
+        self.accountNum = accountNum or self.generate_id()
         self.pin = pin
         self.ownerID = ownerID
+
+    def generate_id(self):
+        connection = sqlite3.connect(DATABASE)
+        cursor = connection.cursor()
+        while True:
+            gen_id = secrets.randbelow(100000)  # generate int from 0 to 99999
+            id = int(str(gen_id).rjust(5, '0')[:5]) # fills 0's
+            data = cursor.execute("SELECT accountNum FROM ACCOUNT WHERE accountNum = ?",[id]).fetchone()
+            if not data:
+                return id
 
     # "create"
     def create_in_db(self):
@@ -26,8 +36,8 @@ class Account:
     def retrieve(accountNum):
         connection = sqlite3.connect(DATABASE)
         cursor = connection.cursor()
-        data = cursor.execute("SELECT accountNum, personID, pinNum FROM ACCOUNT WHERE accountNum = ?",[accountNum]).fetchone()
-        return Account(data[0],data[2],data[1])
+        data = cursor.execute("SELECT * FROM ACCOUNT WHERE accountNum = ?",[accountNum]).fetchone()
+        return Account(data[2], data[1], accountNum=data[0])
 
     #"update"
     def update_db(self):
