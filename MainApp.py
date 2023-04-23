@@ -1,5 +1,7 @@
 import tkinter as tk
 
+
+
 class HomeScreen(tk.Frame):
     def __init__(self, master=None):
         super().__init__(master)
@@ -178,6 +180,12 @@ class AccountCreationScreen(tk.Frame):
         self.account_creation_label.pack(pady=10)
 
         # Create username label and input box
+        self.username_label = tk.Label(self, text="Username:")
+        self.username_label.pack()
+        self.username_entry = tk.Entry(self)
+        self.username_entry.pack()
+
+        # Create name label and input box
         self.username_label = tk.Label(self, text="Name:")
         self.username_label.pack()
         self.username_entry = tk.Entry(self)
@@ -195,8 +203,8 @@ class AccountCreationScreen(tk.Frame):
         self.email_entry = tk.Entry(self)
         self.email_entry.pack()
 
-        # Create date of birth label and input box
-        self.dob_label = tk.Label(self, text="Date of birth:")
+        # Create physical address label and input box
+        self.dob_label = tk.Label(self, text="Address:")
         self.dob_label.pack()
         self.dob_entry = tk.Entry(self)
         self.dob_entry.pack()
