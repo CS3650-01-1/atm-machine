@@ -4,7 +4,9 @@ class representing the ATM interface; all actions that the user can do are done 
 import sqlite3
 from sqlite3 import Error
 
-from account import *
+from accountModel import *
+from checkingsModel import *
+from savingsModel import *
 
 DATABASE = "atm.db"
 

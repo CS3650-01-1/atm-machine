@@ -1,4 +1,6 @@
 import tkinter as tk
+from accountCreationController import *
+
 class AccountCreationScreen(tk.Frame):
     def __init__(self, master=None):
         super().__init__(master)
@@ -11,13 +13,13 @@ class AccountCreationScreen(tk.Frame):
         self.account_creation_label.pack(pady=10)
 
         # Create username label and input box
-        self.username_label = tk.Label(self, text="Username:")
+        self.username_label = tk.Label(self, text="Full Name:")
         self.username_label.pack()
         self.username_entry = tk.Entry(self)
         self.username_entry.pack()
 
         # Create name label and input box
-        self.username_label = tk.Label(self, text="Name:")
+        self.username_label = tk.Label(self, text="Username:")
         self.username_label.pack()
         self.username_entry = tk.Entry(self)
         self.username_entry.pack()
@@ -41,7 +43,7 @@ class AccountCreationScreen(tk.Frame):
         self.dob_entry.pack()
 
         # Create submit label and button
-        self.submit_button = tk.Button(self, text="Submit", command=self.submit_clicked)
+        self.submit_button = tk.Button(self, text="Submit", command=lambda:[self.submit_clicked(), submit_account])
         self.submit_button.pack(pady=5)
 
     def submit_clicked(self):
