@@ -1,14 +1,18 @@
 import tkinter as tk
-class ConfirmCreationScreen(tk.Frame):
+
+class CheckBalance(tk.Frame):
     def __init__(self, master=None):
         super().__init__(master)
         self.master = master
         self.create_widgets()
 
     def create_widgets(self):
-        # Create welcome label
-        self.welcome_label = tk.Label(self, text="Congratulations! Your account\nis all set up!", font=("Arial", 24))
+
+        self.welcome_label = tk.Label(self, text="Check Balance", font=("Arial", 20))
         self.welcome_label.pack(side="top", pady=10)
+
+        self.balance_label = tk.Label(self, text="Your current balance is: $1000", font=("Arial", 16))
+        self.balance_label.pack(side="top", pady=20)
 
         # Create actions labbel
         self.actions_label = tk.Label(self, text="Would you like to perform any\nactions with your account?:")
@@ -24,8 +28,9 @@ class ConfirmCreationScreen(tk.Frame):
 
     def yes_clicked(self):
        # Switch to accounts screen
-       self.master.switch_to_user_accounts_from_password_screen()  
+       self.master.switch_to_user_accounts_from_check_balance_screen()  
 
     def no_clicked(self):
         # Switch to home screen
-        self.master.switch_to_home_screen_from_password()
+        self.master.switch_to_home_screen_from_check_balance()
+

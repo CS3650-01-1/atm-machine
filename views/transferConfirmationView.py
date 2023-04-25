@@ -1,5 +1,5 @@
 import tkinter as tk
-class ConfirmCreationScreen(tk.Frame):
+class ConfirmTransferScreen(tk.Frame):
     def __init__(self, master=None):
         super().__init__(master)
         self.master = master
@@ -7,7 +7,7 @@ class ConfirmCreationScreen(tk.Frame):
 
     def create_widgets(self):
         # Create welcome label
-        self.welcome_label = tk.Label(self, text="Congratulations! Your account\nis all set up!", font=("Arial", 24))
+        self.welcome_label = tk.Label(self, text="Congratulations!\nAmount sucessfully transfered!", font=("Arial", 24))
         self.welcome_label.pack(side="top", pady=10)
 
         # Create actions labbel
@@ -24,8 +24,8 @@ class ConfirmCreationScreen(tk.Frame):
 
     def yes_clicked(self):
        # Switch to accounts screen
-       self.master.switch_to_user_accounts_from_password_screen()  
+       self.master.switch_to_user_accounts_from_transfer_screen()  
 
     def no_clicked(self):
         # Switch to home screen
-        self.master.switch_to_home_screen_from_password()
+        self.master.switch_to_home_screen_from_transfer()

@@ -23,9 +23,9 @@ class WithdrawConfirmScreen(tk.Frame):
         self.no_button.pack(side="right", padx=20)
 
     def yes_clicked(self):
-        # Placeholder method
-        print("YES")
+        # Switch to accounts screen
+        self.master.switch_to_user_accounts_from_withdraw_screen()
 
     def no_clicked(self):
-        # Placeholder method
-        print("NO")
+        # Switch to home screen
+        self.master.switch_to_home_screen_from_withdraw()
