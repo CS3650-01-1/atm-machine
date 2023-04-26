@@ -1,15 +1,18 @@
+# Joshua Kim - Person, Checking, Saving
+# Ethan Bautista - ATM, Transactions, Account 
+
+from pathlib import Path
 import sqlite3
 
-conn = sqlite3.connect('atm.db')
+atm_machine_directory = Path(__file__).parent
+
+conn = sqlite3.connect(atm_machine_directory / "atm.db")
 
 c = conn.cursor()
 
 # Insert the data
 
-# Joshua Kim - Person, Checking, Saving
-# Ethan Bautista - ATM, Transactions, Account 
-
-# c.execute("""CREATE TABLE PERSON    (
+# c.execute("""CREATE TABLE IF NOT EXISTS PERSON    (
 #             personID INT(5) PRIMARY KEY,
 #             fullName VARCHAR(50),
 #             username VARCHAR(50),
@@ -105,8 +108,8 @@ c = conn.cursor()
 #-------------------------------------------------------------------------------------------------------------------------------------------------------------------------#
 
 #Run this to list all data in a table
-# c.execute("SELECT * FROM Person")
-# print(c.fetchall())
+c.execute("SELECT * FROM PERSON")
+print(c.fetchall())
 
 #RUn this to drop a table
 # c.execute("DROP TABLE Person")
