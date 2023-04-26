@@ -1,7 +1,6 @@
 import sqlite3
-from accountModel import *
-from checkingsModel import *
-from savingsModel import *
+
+from models import accountModel, checkingsModel, savingsModel
 
 DATABASE = "atm.db"
 
