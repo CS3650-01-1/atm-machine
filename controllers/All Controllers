@@ -1,0 +1,94 @@
+import sqlite3
+from accountModel import *
+from checkingsModel import *
+from savingsModel import *
+
+DATABASE = "atm.db"
+
+def signin(self):
+        #Logic to be implemented later
+        username = self.username_entry.get()
+        password = self.password_entry.get()
+
+        if (username ==  retrieve(accountNum) and passowrd == pinID)
+            self.master.switch_to_user_accounts_screen()
+        elif
+            self.error_label = tk.Label(self, text ="wrong username/password \nPlease try again!")
+
+           self.error_label.pack(pady = 5)
+
+#user chooses checking account in user_accounts_screen
+def college_checking_clicked(self):
+    connection = sqlite3.connect(DATABASE)
+    cursor = connection.cursor()
+    cursor.execute("SELECT * FROM CHECKINGS WHERE account_number = ?", [self.account_number])
+    data = cursor.fetchone()
+    self.checking_account = Checkings(data[0], data[1], data[2], data[3])
+
+    self.master.switch_to_transactions_screen()
+
+#user chooses savings account in user_accounts_screen
+def college_savings_clicked(self):
+    connection = sqlite3.connect(DATABASE)
+    cursor = connection.cursor()
+    cursor.execute("SELECT * FROM SAVINGS WHERE account_number = ?", [self.account_number])
+    data = cursor.fetchone()
+    self.savings_account = Savings(data[0], data[1], data[2], data[3], data[4])
+
+    self.master.switch_to_transactions_screen()
+
+#user chooses checking account in user_accounts_screen DBL CHECK ABt SPENDING ACCT !!!!
+def college_spending_clicked(self):
+    connection = sqlite3.connect(DATABASE)
+    cursor = connection.cursor()
+    cursor.execute("SELECT * FROM SPENDING WHERE account_number = ?", [self.account_number])
+    data = cursor.fetchone()
+    self.savings_account = Spending(data[0], data[1], data[2], data[3], data[4])
+
+    self.master.switch_to_transactions_screen()
+
+
+def submit_account(self):
+    connection = sqlite3.connect(DATABASE)
+    cursor = connection.cursor()
+    cursor.execute("INSERT OR ABORT INTO ACCOUNT VALUES(?, ?, ?, ?)", (full_name_entry.get(), username_entry.get(), phone_num_entry.get(),dob_entry_get ()))
+    connection.commit()
+
+    self.master.switch_to_password_creation_screen()
+
+#setting password when creating an account
+def submit_clicked(self):
+    connection = sqlite3.connect(DATABASE)
+    cursor = connection.cursor()
+    cursor.execute("INSERT OR ABORT INTO ACCOUNT VALUES(?, ?)",(username, password_entry.get()))
+    connection.commit()
+
+    self.master.switch_to_confirmation_screen()
+
+def submit_deposit(self):
+    amount = amount_entry.get()
+    if account_type == "checking":
+        account = Checking.retrieve(account_number)
+        account.addBalance(amount)
+        account.update_db()
+    elif account_type == "savings":
+        account = Savings.retrieve(account_number)
+        account.addBalance(amount)
+        account.update_db()
+    self.cash_available += amount
+    self.update_db()
+    self.master.switch_to_deposit_confirmation_screen()
+
+def withdraw_submit_clicked(self):
+    amount = amount_entry.get()
+    if account_type == "checking":
+        account = Checking.retrieve(account_number)
+        account.subtractBalance(amount)
+        account.update_db()
+    elif account_type == "savings":
+        account = Savings.retrieve(account_number)
+        account.subtractBalance(amount)
+        account.update_db()
+    self.cash_available -= amount
+    self.update_db()
+    self.master.switch_to_withdraw_confirmation_screen()
