@@ -13,10 +13,10 @@ class AccountCreationScreen(tk.Frame):
         self.account_creation_label.pack(pady=10)
 
         # Create username label and input box
-        self.username_label = tk.Label(self, text="Full Name:")
-        self.username_label.pack()
-        self.username_entry = tk.Entry(self)
-        self.username_entry.pack()
+        self.full_name_label = tk.Label(self, text="Full Name:")
+        self.full_name_label.pack()
+        self.full_name_label = tk.Entry(self)
+        self.full_name_label.pack()
 
         # Create name label and input box
         self.username_label = tk.Label(self, text="Username:")
