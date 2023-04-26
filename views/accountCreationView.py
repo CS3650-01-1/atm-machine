@@ -15,8 +15,8 @@ class AccountCreationScreen(tk.Frame):
         # Create username label and input box
         self.full_name_label = tk.Label(self, text="Full Name:")
         self.full_name_label.pack()
-        self.full_name_label = tk.Entry(self)
-        self.full_name_label.pack()
+        self.full_name_entry = tk.Entry(self)
+        self.full_name_entry.pack()
 
         # Create name label and input box
         self.username_label = tk.Label(self, text="Username:")
