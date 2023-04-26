@@ -9,7 +9,9 @@ from withdrawConfirmView import *
 from withdrawView import *
 from transferView import *
 from transferConfirmationView import *
-from checkBalanceView import*
+from checkBalanceView import *
+from depositView import *
+from depositConfirmationView import *
 
 class MainApp(tk.Tk):
     def __init__(self):
@@ -38,6 +40,31 @@ class MainApp(tk.Tk):
         # Switch to transactions screen
         self.user_accounts_screen.pack_forget()
         self.transactions_screen.pack()
+
+    def switch_to_deposit_screen(self):
+        # Switch to deposit screen 
+        self.deposit_screen = DepositScreen(self)
+        self.transactions_screen.pack_forget()
+        self.deposit_screen.pack()
+
+    def switch_to_deposit_confirmation_screen(self):
+        # Switch to deposit confirmation screen
+        self.deposit_confirmation_screen = DepositCreationScreen(self)
+        self.deposit_screen.pack_forget()
+        self.deposit_confirmation_screen.pack()
+    
+    def switch_to_user_accounts_from_deposit_screen(self):
+        # Switch to user accounts screen from deposit screen
+        self.user_accounts_screen = UserAccounts(self)
+        self.deposit_confirmation_screen.pack_forget()
+        self.user_accounts_screen.pack()
+    
+    def switch_to_home_screen_from_deposit(self):
+        # Switch to home screen from withdraw confirmation screen
+        self.deposit_confirmation_screen.pack_forget()
+        self.home_screen = HomeScreen(self)
+        self.account_creation_screen = AccountCreationScreen(self)
+        self.home_screen.pack() 
         
 
     def switch_to_withdraw_screen(self):

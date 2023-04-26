@@ -15,7 +15,7 @@ class Transactions(tk.Frame):
         self.check_balance_button.pack(pady=5)
 
         # Create Deposit button
-        self.deposit_button = tk.Button(self, text="Deposit", command=self.withdraw_clicked)
+        self.deposit_button = tk.Button(self, text="Deposit", command=self.deposit_clicked)
         self.deposit_button.pack(pady=5)
 
         # Create Withdraw button
@@ -29,6 +29,9 @@ class Transactions(tk.Frame):
     def check_balance_clicked(self):
         # Switch to check balance screen
         self.master.switch_to_check_balance_screen()
+
+    def deposit_clicked(self):
+        self.master.switch_to_deposit_screen()
 
     def withdraw_clicked(self):
         # Switch to withdraw screen
