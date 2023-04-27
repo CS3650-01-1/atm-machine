@@ -76,11 +76,12 @@ class ATM:
             account = Checking.retrieve(account_number)
             account.removeBalance(amount)
             account.update_db()
+            self.cash_available -= amount
         elif account_type == "savings":
             account = Savings.retrieve(account_number)
             account.removeBalance(amount)
             account.update_db()
-        self.cash_available -= amount
+            self.cash_available -= amount
         self.update_db()
 
 
