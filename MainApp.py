@@ -1,17 +1,17 @@
 import tkinter as tk
-from accountCreationView import *
-from confirmationCreationView import *
-from homeView import *
-from passwordCreationView import *
-from transactionsView import *
-from userAccountsView import *
-from withdrawConfirmView import *
-from withdrawView import *
-from transferView import *
-from transferConfirmationView import *
-from checkBalanceView import *
-from depositView import *
-from depositConfirmationView import *
+from views.accountCreationView import *
+from views.homeView import *
+from views.confirmationCreationView import *
+from views.passwordCreationView import *
+from views.transactionsView import *
+from views.userAccountsView import *
+from views.withdrawConfirmView import *
+from views.withdrawView import *
+from views.transferView import *
+from views.transferConfirmationView import *
+from views.checkBalanceView import *
+from views.depositView import *
+from views.depositConfirmationView import *
 
 class MainApp(tk.Tk):
     def __init__(self):
