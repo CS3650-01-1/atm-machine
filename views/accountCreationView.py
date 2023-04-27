@@ -1,5 +1,5 @@
 import tkinter as tk
-from accountCreationController import *
+from controllers import accountCreationController
 
 class AccountCreationScreen(tk.Frame):
     def __init__(self, master=None):
@@ -43,7 +43,7 @@ class AccountCreationScreen(tk.Frame):
         self.dob_entry.pack()
 
         # Create submit label and button
-        self.submit_button = tk.Button(self, text="Submit", command=lambda:[self.submit_clicked(), submit_account])
+        self.submit_button = tk.Button(self, text="Submit", command=lambda:[self.submit_clicked(), accountCreationController.submit_account()])
         self.submit_button.pack(pady=5)
 
     def submit_clicked(self):
