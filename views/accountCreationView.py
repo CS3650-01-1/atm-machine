@@ -1,5 +1,6 @@
 import tkinter as tk
 from controllers import accountCreationController
+from models import personModel
 
 class AccountCreationScreen(tk.Frame):
     def __init__(self, master=None):
@@ -22,7 +23,13 @@ class AccountCreationScreen(tk.Frame):
         self.username_label = tk.Label(self, text="Username:")
         self.username_label.pack()
         self.username_entry = tk.Entry(self)
-        self.username_entry.pack()
+        self.username_entry.pack()        
+        
+        # Create password and input box
+        self.password_label = tk.Label(self, text="Password:")
+        self.password_label.pack()
+        self.password_entry = tk.Entry(self)
+        self.password_entry.pack()
 
         # Create phone number label and input box
         self.phone_num_label = tk.Label(self, text="Phone number:")
@@ -37,15 +44,18 @@ class AccountCreationScreen(tk.Frame):
         self.email_entry.pack()
 
         # Create physical address label and input box
-        self.dob_label = tk.Label(self, text="Address:")
-        self.dob_label.pack()
-        self.dob_entry = tk.Entry(self)
-        self.dob_entry.pack()
+        self.physical_address_label = tk.Label(self, text="Address:")
+        self.physical_address_label.pack()
+        self.physical_address_entry = tk.Entry(self)
+        self.physical_address_entry.pack()
 
         # Create submit label and button
-        self.submit_button = tk.Button(self, text="Submit", command=lambda:[self.submit_clicked(), accountCreationController.submit_account()])
+        self.submit_button = tk.Button(self, text="Submit", command=self.submit_clicked)
         self.submit_button.pack(pady=5)
 
     def submit_clicked(self):
         # Switch to password creation screen
-        self.master.switch_to_password_creation_screen()
+
+
+        accountCreationController.submit_account(self.full_name_entry.get(),self.username_entry.get(), self.password_entry.get(), self.email_entry.get(), self.phone_num_entry.get(), self.physical_address_entry.get())
+        self.master.switch_to_home_view()
