@@ -4,9 +4,10 @@ class representing the ATM interface; all actions that the user can do are done 
 import sqlite3
 from sqlite3 import Error
 
-from accountModel import *
-from checkingsModel import *
-from savingsModel import *
+from .accountModel import *
+from .checkingsModel import *
+from .savingsModel import *
+from .transaction import *
 
 DATABASE = "atm.db"
 
@@ -47,47 +48,56 @@ class ATM:
             return True
         return False
 
-    def deposit_cash(self, amount, account_number, account_type):
+    def deposit_cash(self, amount, specific_id, account_id, account_type):
         if account_type == "checking":
-            account = Checking.retrieve(account_number)
+            account = Checking.retrieve(specific_id)
             account.addBalance(amount)
             account.update_db()
         elif account_type == "savings":
-            account = Savings.retrieve(account_number)
+            account = Savings.retrieve(specific_id)
             account.addBalance(amount)
             account.update_db()
         self.cash_available += amount
         self.update_db()
+        self.log_transaction("deposit", amount, specific_id, account_id, account_type)
 
     # we can probably get rid of this and just make a catch-all deposit method
-    def deposit_check(amount, account_number, account_type):
+    def deposit_check(self, amount, specific_id, account_id, account_type):
         if account_type == "checking":
-            account = Checking.retrieve(account_number)
+            account = Checking.retrieve(specific_id)
             account.addBalance(amount)
             account.update_db()
         elif account_type == "savings":
-            account = Savings.retrieve(account_number)
+            account = Savings.retrieve(specific_id)
             account.addBalance(amount)
             account.update_db()
+        self.log_transaction("deposit", amount, specific_id, account_id, account_type)
 
-    def withdraw_cash(self, amount, account_number, account_type):
+    def withdraw_cash(self, amount, specific_id, account_id, account_type):
         # deny withdrawal if not enough balance
         if account_type == "checking":
-            account = Checking.retrieve(account_number)
+            account = Checking.retrieve(specific_id)
             account.removeBalance(amount)
             account.update_db()
+            self.cash_available -= amount
         elif account_type == "savings":
-            account = Savings.retrieve(account_number)
+            account = Savings.retrieve(specific_id)
             account.removeBalance(amount)
             account.update_db()
-        self.cash_available -= amount
+            self.cash_available -= amount
         self.update_db()
+        self.log_transaction("withdraw", amount, specific_id, account_id, account_type)
 
 
-    def transfer_balance(amount, account_number):
+    def transfer_balance(self, amount, account_number):
         # deny transfer if not enough balance
         pass
 
-    def check_balance(account_number, account_type):
+    def check_balance(self, account_number, account_type):
         pass
+
+    def log_transaction(self, type, amount, specific_id, account_id, account_type):
+        # create transaction object and create in db
+        transaction = Transaction(type, amount, account_id, specific_id, account_type)
+        transaction.create_in_db()
 
