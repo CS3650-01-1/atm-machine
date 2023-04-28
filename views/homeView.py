@@ -31,7 +31,7 @@ class HomeScreen(tk.Frame):
         self.create_account_message.pack(pady=5)
 
         # Create Create account button
-        self.create_account_button = tk.Button(self, text="Create account", command=self.create_account_clicked, sign_In)
+        self.create_account_button = tk.Button(self, text="Create account", command=lambda: [create_account_clicked(), sign_In()])
         self.create_account_button.pack(pady=5)
 
     def signin_clicked(self):
