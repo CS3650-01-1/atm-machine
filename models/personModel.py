@@ -17,6 +17,7 @@ class Person:
         self.physical_address = physical_address
         self.id = id or self.generate_id() 
 
+
     def generate_id(self):
         connection = sqlite3.connect(DATABASE)
         cursor = connection.cursor()
@@ -30,7 +31,7 @@ class Person:
     def create_in_db(self):
         connection = sqlite3.connect(DATABASE)
         cursor = connection.cursor()
-        cursor.execute("INSERT OR ABORT INTO PERSON VALUES(?, ?, ?, ?, ?, ?)", (self.id, self.full_name, self.username, self.password, self.email_address, self.telephone_number, self.physical_address))
+        cursor.execute("INSERT OR ABORT INTO PERSON VALUES(?, ?, ?, ?, ?, ?, ?)", (self.id, self.full_name, self.username, self.password, self.email_address, self.telephone_number, self.physical_address))
         connection.commit()
 
     @staticmethod
