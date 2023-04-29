@@ -67,15 +67,16 @@ class MainApp(tk.Tk):
         self.home_screen.pack() 
         
 
-    def switch_to_withdraw_screen(self):
+    def switch_to_withdraw_screen(self, session):
         # Switch to withdraw screen
-        self.withdraw_screen = WithdrawScreen(self)
+        self.withdraw_screen = WithdrawScreen(session, master=self)
         self.transactions_screen.pack_forget()
         self.withdraw_screen.pack()
-        self.withdraw_confirm_screen = WithdrawConfirmScreen(self)
+
     
     def switch_to_withdraw_confirm_screen(self):
         # Switch to withdraw confirm screen
+        self.withdraw_confirm_screen = WithdrawConfirmScreen(self)
         self.withdraw_screen.pack_forget()
         self.withdraw_confirm_screen.pack()
 

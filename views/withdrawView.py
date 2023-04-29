@@ -1,9 +1,13 @@
 import tkinter as tk
+from controllers.withdrawController import withdrawController
+
 class WithdrawScreen(tk.Frame):
-    def __init__(self, master=None):
+    def __init__(self, session, master=None):
         super().__init__(master)
         self.master = master
+        self.session = session
         self.create_widgets()
+
 
     def create_widgets(self):
         # Create welcome labels 
@@ -24,4 +28,6 @@ class WithdrawScreen(tk.Frame):
 
     def withdraw_submit_clicked(self):
         # Switch to withdraw confirm screen
+        controller = withdrawController(self, self.session)
+        controller.submit_withdraw(int(self.amount_entry.get()))
         self.master.switch_to_withdraw_confirm_screen()

@@ -78,14 +78,14 @@ class ATM:
             account = Checking.retrieve(specific_id)
             account.removeBalance(amount)
             account.update_db()
-            self.cash_available -= amount
+            #self.cash_available -= amount
         elif account_type == "savings":
             account = Savings.retrieve(specific_id)
             account.removeBalance(amount)
             account.update_db()
-            self.cash_available -= amount
-        self.update_db()
-        self.log_transaction("withdraw", amount, specific_id, account_id, account_type)
+           # self.cash_available -= amount
+        #self.update_db()
+        self.log_transaction(self, "withdraw", amount, specific_id, account_id, account_type)
 
     def transfer_balance(self, amount, source_id, destination_id, account_id, account_type):
         # deny transfer if not enough balance
