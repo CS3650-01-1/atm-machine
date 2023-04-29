@@ -16,9 +16,14 @@ class UserAccounts(tk.Frame):
         self.checkings_account_button.pack(pady=10)
 
         # Create College Savings Account button
-        self.savings_account_button = tk.Button(self, text="College\nSavings\nAccount", command=self.college_checking_clicked)
+        self.savings_account_button = tk.Button(self, text="College\nSavings\nAccount", command=self.college_savings_clicked)
         self.savings_account_button.pack(pady=10)
 
     def college_checking_clicked(self):
         # Switch to transactions screen
+        self.session.accountType = "checking"
+        self.master.switch_to_transactions_screen(self.session)
+
+    def college_savings_clicked(self):
+        self.session.accountType = "savings"
         self.master.switch_to_transactions_screen(self.session)

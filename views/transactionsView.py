@@ -33,12 +33,12 @@ class Transactions(tk.Frame):
         self.master.switch_to_check_balance_screen(self.session)
 
     def deposit_clicked(self):
-        self.master.switch_to_deposit_screen()
+        self.master.switch_to_deposit_screen(self.session)
 
     def withdraw_clicked(self):
         # Switch to withdraw screen
-        self.master.switch_to_withdraw_screen() 
+        self.master.switch_to_withdraw_screen(self.session) 
 
     def transfer_clicked(self):
         # Switch to transfer screen
-        self.master.switch_to_transfer_screen()     
+        self.master.switch_to_transfer_screen(self.session)     

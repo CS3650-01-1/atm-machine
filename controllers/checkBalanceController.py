@@ -1,6 +1,6 @@
 import sqlite3
 import tkinter as tk
-from models.checkingsModel import Checking
+from models.atm import ATM
 
 class checkBalanceController:
     def __init__(self, view, session):
@@ -8,5 +8,7 @@ class checkBalanceController:
         self.session = session
 
     def getBalance(self):
-        account = Checking.retrieve(self.session.checkingID)
-        return account.accountBalance
+        if self.session.accountType == "savings":
+            return ATM.check_balance(ATM, self.session.savingsID, self.session.accountType)
+        elif self.session.accountType == "checking":
+            return ATM.check_balance(ATM, self.session.checkingID, self.session.accountType)
