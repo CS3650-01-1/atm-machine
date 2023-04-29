@@ -99,7 +99,7 @@ class ATM:
             destination_account = Checking.retrieve(destination_id)
             source_account.removeBalance(amount)
             destination_account.addBalance(amount)
-        self.log_transaction("Transfer", amount, source_id, account_id, account_type)
+        self.log_transaction(self, "Transfer", amount, source_id, account_id, account_type)
 
     def check_balance(self, specific_id, account_type):
         if account_type == "checking":

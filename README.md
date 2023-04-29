@@ -12,7 +12,7 @@ pip install -r reqs.txt
 
 ## Contributors
 
-joshhkim02  -   Josh Kim
+joshhkim02 & joshk02 -   Josh Kim
 
 EthanB421   -   Ethan Bautista
 
