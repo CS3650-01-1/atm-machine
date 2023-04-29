@@ -57,9 +57,9 @@ class ATM:
             account = Savings.retrieve(specific_id)
             account.addBalance(amount)
             account.update_db()
-        self.cash_available += amount
-        self.update_db()
-        self.log_transaction("deposit", amount, specific_id, account_id, account_type)
+        # self.cash_available += amount
+        #self.update_db()
+        self.log_transaction(self, "deposit", amount, specific_id, account_id, account_type)
 
     # we can probably get rid of this and just make a catch-all deposit method
     def deposit_check(self, amount, specific_id, account_id, account_type):

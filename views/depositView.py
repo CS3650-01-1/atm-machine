@@ -1,9 +1,11 @@
 import tkinter as tk
+from controllers.depositController import depositController
 
 class DepositScreen(tk.Frame):
-    def __init__(self, master=None):
+    def __init__(self, session, master=None):
         super().__init__(master)
         self.master = master
+        self.session = session
         self.create_widgets()
 
     def create_widgets(self):
@@ -24,6 +26,8 @@ class DepositScreen(tk.Frame):
 
 
     def submit_deposit(self):
+        depo = depositController(self, self.session)
+        depo.submit_deposit(int(self.amount_entry.get()))
         #Go back to home screen
         self.master.switch_to_deposit_confirmation_screen()
 

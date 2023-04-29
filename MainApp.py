@@ -41,9 +41,9 @@ class MainApp(tk.Tk):
         self.user_accounts_screen.pack_forget()
         self.transactions_screen.pack()
 
-    def switch_to_deposit_screen(self):
+    def switch_to_deposit_screen(self, session):
         # Switch to deposit screen 
-        self.deposit_screen = DepositScreen(self)
+        self.deposit_screen = DepositScreen(session, master=self)
         self.transactions_screen.pack_forget()
         self.deposit_screen.pack()
 
