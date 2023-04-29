@@ -5,7 +5,7 @@ DATABASE = "atm.db"
 
 class Savings:
     def __init__(self,accountNum,accountBalance, savingsID=None):
-        self.savingsID = savingsID or self.generate_id
+        self.savingsID = savingsID or self.generate_id()
         self.accountNum = accountNum
         self.accountBalance = accountBalance
     
@@ -15,7 +15,7 @@ class Savings:
         while True:
             gen_id = secrets.randbelow(100000)  # generate int from 0 to 99999
             id = int(str(gen_id).rjust(5, '0')[:5]) # fills 0's
-            data = cursor.execute("SELECT savingsID FROM SAVING WHERE savingsID = ?",[id]).fetchone()
+            data = cursor.execute("SELECT savingID FROM SAVING WHERE savingID = ?",[id]).fetchone()
             if not data:
                 return id
 

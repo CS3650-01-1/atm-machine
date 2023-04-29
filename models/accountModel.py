@@ -4,15 +4,26 @@ class representing a bank account; its transaction log is done through database 
 
 import sqlite3, secrets
 from sqlite3 import Error
+from .checkingsModel import Checking
+from .savingsModel import Savings
 
 DATABASE = "atm.db"
 
 class Account:
-    # probably irrelevant
-    def __init__(self, pin, ownerID, accountNum=None):
+    def __init__(self, name, username, password, email, phone, address, accountNum=None):
         self.accountNum = accountNum or self.generate_id()
-        self.pin = pin
-        self.ownerID = ownerID
+        self.name = name
+        self.username = username
+        self.password = password
+        self.email = email
+        self.phone = phone
+        self.address = address
+
+        checkingAcc = Checking(self.accountNum, 0)
+        checkingAcc.create_in_db()
+        savingsAcc = Savings(self.accountNum, 0)
+        savingsAcc.create_in_db()
+        
 
     def generate_id(self):
         connection = sqlite3.connect(DATABASE)
@@ -28,7 +39,7 @@ class Account:
     def create_in_db(self):
         connection = sqlite3.connect(DATABASE)
         cursor = connection.cursor()
-        cursor.execute("INSERT OR ABORT INTO ACCOUNT VALUES(?, ?, ?)", (self.accountNum, self.ownerID, self.pin))
+        cursor.execute("INSERT OR ABORT INTO ACCOUNT VALUES(?, ?, ?, ?, ?, ?, ?)", (self.accountNum, self.name, self.username, self.password, self.email, self.phone, self.address))
         connection.commit()
 
     #"read"
@@ -38,13 +49,13 @@ class Account:
         connection = sqlite3.connect(DATABASE)
         cursor = connection.cursor()
         data = cursor.execute("SELECT * FROM ACCOUNT WHERE accountNum = ?",[accountNum]).fetchone()
-        return Account(data[2], data[1], accountNum=data[0])
+        return Account(data[1], data[2], data[3], data[4], data[5], data[6], accountNum=data[0])
 
     #"update"
     def update_db(self):
         connection = sqlite3.connect(DATABASE)
         cursor = connection.cursor()
-        cursor.execute("INSERT OR REPLACE INTO ACCOUNT VALUES(?, ?, ?)", (self.accountNum, self.ownerID, self.pin))
+        cursor.execute("INSERT OR REPLACE INTO ACCOUNT VALUES(?, ?, ?, ?, ?, ?, ?)", (self.accountNum, self.name, self.username, self.password, self.email, self.phone, self.address))
         connection.commit()
 
     #"delete"

@@ -1,5 +1,8 @@
 import tkinter as tk
 
+from controllers import transferBalanceController
+
+
 class TransferScreen(tk.Frame):
     def __init__(self, master=None):
         super().__init__(master)
@@ -24,20 +27,23 @@ class TransferScreen(tk.Frame):
 
         # Create radio buttons for the bank accounts
         account_var = tk.StringVar()
-        account_var.set("Account 1")
+        account_var.set("Savings Account")
 
-        account_1_rb = tk.Radiobutton(account_frame, text="Account 1", variable=account_var, value="Account 1")
-        account_2_rb = tk.Radiobutton(account_frame, text="Account 2", variable=account_var, value="Account 2")
-        account_3_rb = tk.Radiobutton(account_frame, text="Account 3", variable=account_var, value="Account 3")
+        if(account_type == checking):
+            account_savings_rb = tk.Radiobutton(account_frame, text="Savings Account", variable=account_var, value="Savings Account")
+            account_savings_rb.pack(side="left")
+        else:
+            account_checking_rb = tk.Radiobutton(account_frame, text="Checking Account", variable=account_var, value="Checking Account")
+            account_checking_rb.pack(side="left")
 
-        account_1_rb.pack(side="left")
-        account_2_rb.pack(side="left")
-        account_3_rb.pack(side="left")
+
+
 
         # Create a submit button
         submit_button = tk.Button(self, text="Submit", command=self.transfer_submit_clicked)
         submit_button.pack(pady=10)
 
     def transfer_submit_clicked(self):
+        transferBalanceController.transfer_balance(self.amount_entry.get(), account, destination)
         self.master.switch_to_transfer_confirm_screen()
 

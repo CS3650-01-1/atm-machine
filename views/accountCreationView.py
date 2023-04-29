@@ -1,6 +1,5 @@
 import tkinter as tk
 from controllers import accountCreationController
-from models import personModel
 
 class AccountCreationScreen(tk.Frame):
     def __init__(self, master=None):

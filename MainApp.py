@@ -29,15 +29,15 @@ class MainApp(tk.Tk):
         self.account_creation_screen.pack()
         self.password_creation_screen = PasswordCreationScreen(self)
 
-    def switch_to_user_accounts_screen(self):
+    def switch_to_user_accounts_screen(self, session):
         # Switch to user accounts screen
-        self.user_accounts_screen = UserAccounts(self)
+        self.user_accounts_screen = UserAccounts(session, master=self)
         self.home_screen.pack_forget()
         self.user_accounts_screen.pack()
-        self.transactions_screen = Transactions(self)
     
-    def switch_to_transactions_screen(self):
+    def switch_to_transactions_screen(self, session):
         # Switch to transactions screen
+        self.transactions_screen = Transactions(session, master=self)
         self.user_accounts_screen.pack_forget()
         self.transactions_screen.pack()
 
@@ -142,8 +142,8 @@ class MainApp(tk.Tk):
         self.account_creation_screen = AccountCreationScreen(self)
         self.home_screen.pack() 
 
-    def switch_to_check_balance_screen(self):
-        self.check_balance_screen = CheckBalance(self)
+    def switch_to_check_balance_screen(self, session):
+        self.check_balance_screen = CheckBalance(session, master=self)
         self.transactions_screen.pack_forget()
         self.check_balance_screen.pack()
 
@@ -160,6 +160,11 @@ class MainApp(tk.Tk):
         self.account_creation_screen = AccountCreationScreen(self)
         self.home_screen.pack() 
 
+    def switch_to_home_view(self):
+        self.account_creation_screen.pack_forget()
+        self.home_screen = HomeScreen(self)
+        self.account_creation_screen = AccountCreationScreen(self)
+        self.home_screen.pack()
 
 
 app = MainApp()

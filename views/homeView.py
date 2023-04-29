@@ -1,4 +1,8 @@
 import tkinter as tk
+
+from controllers.signInController import signInController
+from models.session import Session
+
 class HomeScreen(tk.Frame):
     def __init__(self, master=None):
         super().__init__(master)
@@ -31,12 +35,14 @@ class HomeScreen(tk.Frame):
         self.create_account_message.pack(pady=5)
 
         # Create Create account button
-        self.create_account_button = tk.Button(self, text="Create account", command=lambda: [self.create_account_clicked(), sign_In()])
+        self.create_account_button = tk.Button(self, text="Create account", command=lambda: [self.create_account_clicked()])
         self.create_account_button.pack(pady=5)
 
     def signin_clicked(self):
         #Switch to user accounts screen
-        self.master.switch_to_user_accounts_screen()
+        session = Session()
+        signInCont = signInController(self, session)
+        signInCont.sign_In(self.username_entry.get(), self.password_entry.get())
 
     def create_account_clicked(self):
         # Switch to account creation screen
