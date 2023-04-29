@@ -36,7 +36,7 @@ class HomeScreen(tk.Frame):
 
     def signin_clicked(self):
         #Switch to user accounts screen
-        self.master.switch_to_user_accounts_screen()
+        signInController.sign_In(self.username_entry.get(), self.password_entry.get())
 
     def create_account_clicked(self):
         # Switch to account creation screen
