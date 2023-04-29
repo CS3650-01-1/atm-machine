@@ -1,6 +1,5 @@
 import sqlite3
-from models.personModel import *
-from models.accountModel import *
+from models import accountModel
 import tkinter as tk
 
 DATABASE = "atm.db"
@@ -19,3 +18,4 @@ def sign_In(username, password):
         error_label = tk.Label(text="Wrong password \nPlease try again!")
         error_label.pack(pady=5)
 
+sign_In("johndoe", "password123")

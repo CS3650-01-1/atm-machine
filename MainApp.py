@@ -160,6 +160,11 @@ class MainApp(tk.Tk):
         self.account_creation_screen = AccountCreationScreen(self)
         self.home_screen.pack() 
 
+    def switch_to_home_view(self):
+        self.account_creation_screen.pack_forget()
+        self.home_screen = HomeScreen(self)
+        self.account_creation_screen = AccountCreationScreen(self)
+        self.home_screen.pack()
 
 
 app = MainApp()
