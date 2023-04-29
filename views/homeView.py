@@ -1,6 +1,8 @@
 import tkinter as tk
 
 from controllers.signInController import signInController
+from models.session import Session
+
 class HomeScreen(tk.Frame):
     def __init__(self, master=None):
         super().__init__(master)
@@ -38,7 +40,8 @@ class HomeScreen(tk.Frame):
 
     def signin_clicked(self):
         #Switch to user accounts screen
-        signInCont = signInController(self)
+        session = Session()
+        signInCont = signInController(self, session)
         signInCont.sign_In(self.username_entry.get(), self.password_entry.get())
 
     def create_account_clicked(self):

@@ -1,13 +1,12 @@
 import sqlite3
+import tkinter as tk
+from models.checkingsModel import Checking
 
-from models import atm
-from views.depositView import *
-from models.accountModel import *
-from models.checkingsModel import *
-from models.savingsModel import *
-from models.atm import *
+class checkBalanceController:
+    def __init__(self, view, session):
+        self.view = view
+        self.session = session
 
-DATABASE = "atm.db"
-def check_balance(self, account):
-    atm.check_balance()
-
+    def getBalance(self):
+        account = Checking.retrieve(self.session.checkingID)
+        return account.accountBalance

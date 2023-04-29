@@ -1,7 +1,8 @@
 import tkinter as tk
 class UserAccounts(tk.Frame):
-    def __init__(self, master=None):
+    def __init__(self, session, master=None):
         super().__init__(master)
+        self.session = session
         self.master = master
         self.create_widgets()
 
@@ -20,4 +21,4 @@ class UserAccounts(tk.Frame):
 
     def college_checking_clicked(self):
         # Switch to transactions screen
-        self.master.switch_to_transactions_screen()
+        self.master.switch_to_transactions_screen(self.session)

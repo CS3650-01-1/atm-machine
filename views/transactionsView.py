@@ -1,9 +1,11 @@
 import tkinter as tk
 class Transactions(tk.Frame):
-    def __init__(self, master=None):
+    def __init__(self, session, master=None):
         super().__init__(master)
         self.master = master
+        self.session = session
         self.create_widgets()
+        print(self.session)
 
     def create_widgets(self):
         # Create welcome label
@@ -28,7 +30,7 @@ class Transactions(tk.Frame):
 
     def check_balance_clicked(self):
         # Switch to check balance screen
-        self.master.switch_to_check_balance_screen()
+        self.master.switch_to_check_balance_screen(self.session)
 
     def deposit_clicked(self):
         self.master.switch_to_deposit_screen()

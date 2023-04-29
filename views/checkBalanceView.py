@@ -1,17 +1,22 @@
 import tkinter as tk
+from controllers.checkBalanceController import checkBalanceController
 
 class CheckBalance(tk.Frame):
-    def __init__(self, master=None):
+    def __init__(self, session, master=None):
         super().__init__(master)
         self.master = master
+        self.session = session
         self.create_widgets()
 
     def create_widgets(self):
+        checkBalanceCon = checkBalanceController(self, self.session)
+        balance = checkBalanceCon.getBalance()
+        balanceText = f"Your current balance is: ${balance}"
 
         self.welcome_label = tk.Label(self, text="Check Balance", font=("Arial", 20))
         self.welcome_label.pack(side="top", pady=10)
 
-        self.balance_label = tk.Label(self, text="Your current balance is: $1000", font=("Arial", 16))
+        self.balance_label = tk.Label(self, text=balanceText, font=("Arial", 16))
         self.balance_label.pack(side="top", pady=20)
 
         # Create actions labbel
