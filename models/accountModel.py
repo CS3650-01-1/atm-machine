@@ -4,6 +4,8 @@ class representing a bank account; its transaction log is done through database 
 
 import sqlite3, secrets
 from sqlite3 import Error
+from .checkingsModel import Checking
+from .savingsModel import Savings
 
 DATABASE = "atm.db"
 
@@ -16,6 +18,11 @@ class Account:
         self.email = email
         self.phone = phone
         self.address = address
+
+        checkingAcc = Checking(self.accountNum, 0)
+        checkingAcc.create_in_db()
+        savingsAcc = Savings(self.accountNum, 0)
+        savingsAcc.create_in_db()
         
 
     def generate_id(self):
