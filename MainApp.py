@@ -79,9 +79,9 @@ class MainApp(tk.Tk):
         self.withdraw_screen.pack_forget()
         self.withdraw_confirm_screen.pack()
 
-    def switch_to_transfer_screen(self):
+    def switch_to_transfer_screen(self, session):
         # Switch to transfer screen
-        self.transfer_screen = TransferScreen(self)
+        self.transfer_screen = TransferScreen(session, master=self)
         self.transactions_screen.pack_forget()
         self.transfer_screen.pack()
         
@@ -123,9 +123,9 @@ class MainApp(tk.Tk):
         self.account_creation_screen = AccountCreationScreen(self)
         self.home_screen.pack() 
 
-    def switch_to_transfer_confirm_screen(self):
+    def switch_to_transfer_confirm_screen(self, session):
         # Switch to transfer screen
-        self.transfer_confirm_screen = ConfirmTransferScreen(self)
+        self.transfer_confirm_screen = ConfirmTransferScreen(session, master = self)
         self.transfer_screen.pack_forget()
         self.transfer_confirm_screen.pack()
     
