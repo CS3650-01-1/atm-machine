@@ -61,17 +61,6 @@ class ATM:
         self.update_db()
         self.log_transaction("deposit", amount, specific_id, account_id, account_type)
 
-    # we can probably get rid of this and just make a catch-all deposit method
-    def deposit_check(self, amount, specific_id, account_id, account_type):
-        if account_type == "checking":
-            account = Checking.retrieve(specific_id)
-            account.addBalance(amount)
-            account.update_db()
-        elif account_type == "savings":
-            account = Savings.retrieve(specific_id)
-            account.addBalance(amount)
-            account.update_db()
-        self.log_transaction("deposit", amount, specific_id, account_id, account_type)
 
     def withdraw_cash(self, amount, specific_id, account_id, account_type):
         # deny withdrawal if not enough balance
@@ -89,12 +78,30 @@ class ATM:
         self.log_transaction("withdraw", amount, specific_id, account_id, account_type)
 
 
-    def transfer_balance(self, amount, account_number):
+    def transfer_balance(self, amount, source_id, destination_id, account_id, account_type):
         # deny transfer if not enough balance
-        pass
+        if account_type == "checking":
+            source_account = Checking.retrieve(source_id)
+            destination_account = Savings.retrieve(destination_id)
+            source_account.removeBalance(amount)
+            destination_account.addBalance(amount)
+        elif account_type == "savings":
+            source_account = Savings.retrieve(source_id)
+            destination_account = Checking.retrieve(destination_id)
+            source_account.removeBalance(amount)
+            destination_account.addBalance(amount)
+        self.update_db()
+        self.log_transaction("Transfer", amount, source_id, account_id, account_type)
 
-    def check_balance(self, account_number, account_type):
-        pass
+    def check_balance(self, specific_id, account_type):
+        if account_type == "checking":
+            account = Checking.retrieve(specific_id)
+            balance = account.accountBalance
+            return balance
+        elif account_type == "savings":
+            account = Savings.retrieve(specific_id)
+            balance = account.accountBalance
+            return balance
 
     def log_transaction(self, type, amount, specific_id, account_id, account_type):
         # create transaction object and create in db
