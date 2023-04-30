@@ -32,6 +32,10 @@ class Transactions(tk.Frame):
         self.view_trans_button = tk.Button(self, text="View Transactions", command=self.view_trans_clicked)
         self.view_trans_button.pack(pady=5)
 
+        # Create Switch Accounts button
+        self.switch_account_button = tk.Button(self, text="Switch Account", command=self.switch_account_button_clicked)
+        self.switch_account_button.pack(pady=10)
+
         # Create log out button
         self.log_out_button = tk.Button(self, text="Log Out", command=self.log_out_button_clicked)
         self.log_out_button.pack(pady=10)
@@ -56,3 +60,6 @@ class Transactions(tk.Frame):
 
     def log_out_button_clicked(self):
         self.master.switch_to_home_view(self)
+
+    def switch_account_button_clicked(self):
+        self.master.switch_to_user_accounts_view(self, self.session)

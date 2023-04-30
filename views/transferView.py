@@ -26,6 +26,9 @@ class TransferScreen(tk.Frame):
         self.back_button = tk.Button(self, text="Back", command=self.back_button_pressed)
         self.back_button.pack(side="bottom", pady=5)
 
+        # Create error label
+        self.error_label = tk.Label(self, text="Insufficient funds or invalid input! Please try a different amount.")
+
     def back_button_pressed(self):
         self.master.switch_to_trans_screen(self, self.session)
 

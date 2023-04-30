@@ -35,6 +35,11 @@ class MainApp(tk.Tk):
         self.user_accounts_screen = UserAccounts(session, master=self)
         self.home_screen.pack_forget()
         self.user_accounts_screen.pack()
+
+    def switch_to_user_accounts_view(self, view, session):
+        self.user_accounts_screen = UserAccounts(session, master=self)
+        view.pack_forget()
+        self.user_accounts_screen.pack()
     
     def switch_to_transactions_screen(self, session):
         # Switch to transactions screen

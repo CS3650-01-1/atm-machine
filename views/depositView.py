@@ -36,15 +36,17 @@ class DepositScreen(tk.Frame):
     def submit_deposit(self):
         # validate input
         entered_string = self.amount_entry.get()
-        if not (entered_string.isdecimal()):
-            self.error_label.pack(pady=10)
-        else:
+        try:
+            if '.' in entered_string and len(entered_string.split('.')[1]) > 2:
+                print(entered_string.split('.')[1])
+                raise InvalidOperation
+            decimalEntry = Decimal(entered_string)
             depo = depositController(self, self.session)
-        # convert the entered string to a Decimal object, and then rounds it to two decimal places;
-        # then pass the value to the controller
-            depo.submit_deposit(round(Decimal(self.amount_entry.get()),2))
-            #Go back to home screen
+            depo.submit_deposit(decimalEntry)
             self.master.switch_to_deposit_confirmation_screen(self.session)
+        except InvalidOperation:
+            self.error_label.pack_forget()
+            self.error_label.pack(pady=10)
 
 
 
