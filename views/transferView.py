@@ -22,9 +22,7 @@ class TransferScreen(tk.Frame):
         # Create a submit button
         submit_button = tk.Button(self, text="Submit", command=self.transfer_submit_clicked)
         submit_button.pack(pady=10)
-
-        self.error_label = tk.Label(self, text="Enter a valid dollar amount!")
-
+        
     def transfer_submit_clicked(self):
         # validate input
         entered_string = self.amount_entry.get()
@@ -32,5 +30,8 @@ class TransferScreen(tk.Frame):
             self.error_label.pack(pady=10)
         else:
             controller = transferBalanceController(self, self.session)
-            controller.transferBalance(round(Decimal(self.amount_entry.get()),2))
-            self.master.switch_to_transfer_confirm_screen(self.session)
+            if(controller.transferBalance(round(Decimal(self.amount_entry.get()),2))):
+                self.master.switch_to_transfer_confirm_screen(self.session)
+            else:
+                self.error_label = tk.Label(self, text="Insufficient funds or invalid input! Please try a different amount.")
+                self.error_label.pack(pady=10)

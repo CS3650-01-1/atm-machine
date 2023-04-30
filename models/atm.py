@@ -95,14 +95,19 @@ class ATM:
         if account_type == "checking":
             source_account = Checking.retrieve(source_id)
             destination_account = Savings.retrieve(destination_id)
-            source_account.removeBalance(amount)
-            destination_account.addBalance(amount)
+            if(source_account.removeBalance(amount)):
+                destination_account.addBalance(amount)
+            else:
+                return False    # did not succeed
         elif account_type == "savings":
             source_account = Savings.retrieve(source_id)
             destination_account = Checking.retrieve(destination_id)
-            source_account.removeBalance(amount)
-            destination_account.addBalance(amount)
+            if(source_account.removeBalance(amount)):
+                destination_account.addBalance(amount)
+            else:
+                return False # did not succeed
         self.log_transaction(self, "Transfer", str(amount), source_id, account_id, account_type)
+        return True
 
     def check_balance(self, specific_id, account_type):
         if account_type == "checking":

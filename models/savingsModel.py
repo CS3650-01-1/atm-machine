@@ -53,8 +53,10 @@ class Savings:
         if self.accountBalance >= amount:
             self.accountBalance -= amount
             self.update_db()
+            return True
         else:
             print("Insufficient funds")
+            return False
 
 
     def __str__(self) -> str:
