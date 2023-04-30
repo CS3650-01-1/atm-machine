@@ -39,10 +39,14 @@ class WithdrawScreen(tk.Frame):
     def withdraw_submit_clicked(self):
         # validate input
         entered_string = self.amount_entry.get()
-        if not (entered_string.isdecimal()):
-            self.error_label.pack(pady=10)
-        else:
-            # Switch to withdraw confirm screen
+        try:
+            if '.' in entered_string and len(entered_string.split('.')[1]) > 2:
+                print(entered_string.split('.')[1])
+                raise InvalidOperation
+            decimalEntry = Decimal(entered_string)
             controller = withdrawController(self, self.session)
-            controller.submit_withdraw(round(Decimal(self.amount_entry.get()),2))
+            controller.submit_withdraw(decimalEntry)
             self.master.switch_to_withdraw_confirm_screen(self.session)
+        except InvalidOperation:
+            self.error_label.pack_forget()
+            self.error_label.pack(pady=10)
