@@ -154,9 +154,9 @@ class MainApp(tk.Tk):
         self.transactions_screen.pack_forget()
         self.check_balance_screen.pack()
 
-    def switch_to_user_accounts_from_check_balance_screen(self):
+    def switch_to_user_accounts_from_check_balance_screen(self, session):
         # Switch to user accounts screen from transfer confirmation screen
-        self.user_accounts_screen = UserAccounts(self)
+        self.user_accounts_screen = UserAccounts(session, master=self)
         self.check_balance_screen.pack_forget()
         self.user_accounts_screen.pack()
 
