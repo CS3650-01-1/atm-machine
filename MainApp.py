@@ -188,7 +188,11 @@ class MainApp(tk.Tk):
         self.home_screen = HomeScreen(self)
         self.account_creation_screen = AccountCreationScreen(self)
         self.home_screen.pack()
-
+    
+    def switch_to_confirmation_from_creation_view(self, view):
+        view.pack_forget()
+        self.confirm_creation_screen = ConfirmCreationScreen(self)
+        self.confirm_creation_screen.pack()
 
 app = MainApp()
 app.mainloop()

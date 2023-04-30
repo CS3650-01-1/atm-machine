@@ -49,6 +49,7 @@ class AccountCreationController:
         else:
             account = accountModel.Account(full_name, username, password, email_address, telephone_number, physical_address)
             account.create_in_db()
-            self.view.master.switch_to_home_view()
+            #self.view.master.switch_to_home_view()
+            self.view.master.switch_to_confirmation_from_creation_view(self.view)
 
 
