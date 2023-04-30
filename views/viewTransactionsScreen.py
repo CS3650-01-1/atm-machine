@@ -9,13 +9,25 @@ class ViewTransactions(tk.Frame):
         self.create_widgets()
     
     def create_widgets(self):
-        self.transaction_listbox = tk.Listbox(self)
-        self.transaction_listbox.pack(side="top", pady=10)
+        # self.transaction_listbox = tk.Listbox(self, width=60, height=10)
+        # self.transaction_listbox.grid(row=0, column=0, columnspan=3, padx=5, pady=5)
+
+        # create headers for columns
+        self.date_header = tk.Label(self, text="Date")
+        self.date_header.grid(row=1, column=0, padx=5, pady=5)
+        self.type_header = tk.Label(self, text="Type")
+        self.type_header.grid(row=1, column=1, padx=5, pady=5)
+        self.amount_header = tk.Label(self, text="Amount")
+        self.amount_header.grid(row=1, column=2, padx=5, pady=5)
 
         # Retrieve transactions
         controller = viewTransactionsController(self, self.session)
         transactions = controller.get_all_transactions()
         # Display transactions
-        for transaction in transactions:
-            self.transaction_listbox.insert(tk.END, "Date: {}\tTransaction Type: {}\tAmount: {}".format(transaction[5], transaction[4], transaction[6]))
-        pass
+        for i, transaction in enumerate(transactions):
+            self.date_label = tk.Label(self, text=transaction[5])
+            self.date_label.grid(row=i+2, column=0, padx=5, pady=5)
+            self.type_label = tk.Label(self, text=transaction[4])
+            self.type_label.grid(row=i+2, column=1, padx=5, pady=5)
+            self.amount_label = tk.Label(self, text=transaction[6])
+            self.amount_label.grid(row=i+2, column=2, padx=5, pady=5)
