@@ -1,5 +1,6 @@
 import sqlite3, secrets
 from sqlite3 import Error
+from decimal import *
 
 DATABASE = "atm.db"
 
@@ -22,7 +23,7 @@ class Checking:
     def create_in_db(self):
         connection = sqlite3.connect(DATABASE)
         cursor = connection.cursor()
-        cursor.execute("INSERT OR ABORT INTO CHECKING VALUES(?, ?, ?)", (self.checkingID, self.accountNum, self.accountBalance))
+        cursor.execute("INSERT OR ABORT INTO CHECKING VALUES(?, ?, ?)", (self.checkingID, self.accountNum, str(self.accountBalance)))
         connection.commit()
 
     @staticmethod
@@ -30,12 +31,12 @@ class Checking:
         connection = sqlite3.connect(DATABASE)
         cursor = connection.cursor()
         data = cursor.execute("SELECT checkingID, accountNum, accountBalance FROM CHECKING WHERE checkingID = ?",[checkingID]).fetchone()
-        return Checking(data[1],data[2], checkingID=data[0])
+        return Checking(data[1],Decimal(data[2]), checkingID=data[0])
 
     def update_db(self):
         connection = sqlite3.connect(DATABASE)
         cursor = connection.cursor()
-        cursor.execute("INSERT OR REPLACE INTO CHECKING VALUES(?, ?, ?)", (self.checkingID, self.accountNum, self.accountBalance))
+        cursor.execute("INSERT OR REPLACE INTO CHECKING VALUES(?, ?, ?)", (self.checkingID, self.accountNum, str(self.accountBalance)))
         connection.commit()
 
     def delete_from_db(self):

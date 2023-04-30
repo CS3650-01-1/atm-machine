@@ -1,6 +1,7 @@
 import tkinter as tk
 
 from controllers.transferBalanceController import transferBalanceController
+from decimal import *
 
 
 class TransferScreen(tk.Frame):
@@ -24,5 +25,5 @@ class TransferScreen(tk.Frame):
 
     def transfer_submit_clicked(self):
         controller = transferBalanceController(self, self.session)
-        controller.transferBalance(int(self.amount_entry.get()))
+        controller.transferBalance(round(Decimal(self.amount_entry.get()),2))
         self.master.switch_to_transfer_confirm_screen(self.session)

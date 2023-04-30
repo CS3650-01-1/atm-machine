@@ -1,5 +1,6 @@
 import tkinter as tk
 from controllers.withdrawController import withdrawController
+from decimal import *
 
 class WithdrawScreen(tk.Frame):
     def __init__(self, session, master=None):
@@ -29,5 +30,5 @@ class WithdrawScreen(tk.Frame):
     def withdraw_submit_clicked(self):
         # Switch to withdraw confirm screen
         controller = withdrawController(self, self.session)
-        controller.submit_withdraw(int(self.amount_entry.get()))
+        controller.submit_withdraw(round(Decimal(self.amount_entry.get()),2))
         self.master.switch_to_withdraw_confirm_screen(self.session)

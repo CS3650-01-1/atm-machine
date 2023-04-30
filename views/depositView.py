@@ -1,5 +1,6 @@
 import tkinter as tk
 from controllers.depositController import depositController
+from decimal import *
 
 class DepositScreen(tk.Frame):
     def __init__(self, session, master=None):
@@ -27,7 +28,9 @@ class DepositScreen(tk.Frame):
 
     def submit_deposit(self):
         depo = depositController(self, self.session)
-        depo.submit_deposit(int(self.amount_entry.get()))
+        # convert the entered string to a Decimal object, and then rounds it to two decimal places;
+        # then pass the value to the controller
+        depo.submit_deposit(round(Decimal(self.amount_entry.get()),2))
         #Go back to home screen
         self.master.switch_to_deposit_confirmation_screen(self.session)
 
