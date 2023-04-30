@@ -59,6 +59,10 @@ class AccountCreationScreen(tk.Frame):
         self.submit_button = tk.Button(self, text="Submit", command=self.submit_clicked)
         self.submit_button.pack(pady=5)
 
+        # create back button
+        self.back_button = tk.Button(self, text="Back", command=self.back_button_clicked)
+        self.back_button.pack(pady=5)
+
     def submit_clicked(self):
         # Switch to password creation screen
         controller = AccountCreationController(self)
@@ -68,3 +72,5 @@ class AccountCreationScreen(tk.Frame):
         for label in self.error_labels:
             label.pack_forget()
         
+    def back_button_clicked(self):
+        self.master.switch_to_home_view()
