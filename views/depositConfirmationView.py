@@ -1,7 +1,8 @@
 import tkinter as tk
 class DepositCreationScreen(tk.Frame):
-    def __init__(self, master=None):
+    def __init__(self, session, master=None):
         super().__init__(master)
+        self.session = session
         self.master = master
         self.create_widgets()
 
@@ -24,7 +25,7 @@ class DepositCreationScreen(tk.Frame):
 
     def yes_clicked(self):
        # Switch to accounts screen
-       self.master.switch_to_user_accounts_from_deposit_screen()  
+       self.master.switch_to_user_accounts_from_deposit_screen(self.session)  
 
     def no_clicked(self):
         # Switch to home screen

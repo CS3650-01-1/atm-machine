@@ -21,15 +21,15 @@ class DepositScreen(tk.Frame):
         self.amount_entry.pack(pady=5)
 
         # Create button to submit deposit and go back to the main menu
-        self.submit_button = tk.Button(self, text="Deposit", command=self.submit_deposit)
-        self.submit_button.pack(pady=10)
+        submit_button = tk.Button(self, text="Deposit", command=self.submit_deposit)
+        submit_button.pack(pady=10)
 
 
     def submit_deposit(self):
         depo = depositController(self, self.session)
         depo.submit_deposit(int(self.amount_entry.get()))
         #Go back to home screen
-        self.master.switch_to_deposit_confirmation_screen()
+        self.master.switch_to_deposit_confirmation_screen(self.session)
 
 
 
