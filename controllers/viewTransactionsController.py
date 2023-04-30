@@ -7,6 +7,6 @@ class viewTransactionsController:
     
     def get_all_transactions(self):
         if self.session.accountType == "checking":
-            return ATM.get_all_transactions(self.session.checkingID)
+            return ATM.get_all_transactions(ATM, self.session.checkingID)
         elif self.session.accountType == "savings":
-            return ATM.get_all_transactions(self.session.savingsID)
+            return ATM.get_all_transactions(ATM, self.session.savingsID)

@@ -30,6 +30,7 @@ class Transactions(tk.Frame):
 
         # Create View Transactions button
         self.view_trans_button = tk.Button(self, text="View Transactions", command=self.view_trans_clicked)
+        self.view_trans_button.pack(pady=5)
 
     def check_balance_clicked(self):
         # Switch to check balance screen

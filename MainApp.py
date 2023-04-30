@@ -12,6 +12,7 @@ from views.transferConfirmationView import *
 from views.checkBalanceView import *
 from views.depositView import *
 from views.depositConfirmationView import *
+from views.viewTransactionsScreen import *
 
 class MainApp(tk.Tk):
     def __init__(self):
@@ -42,7 +43,7 @@ class MainApp(tk.Tk):
         self.transactions_screen.pack()
 
     def switch_to_view_trans_screen(self, session):
-        self.view_trans_screen = ViewTransactionsScreen(session, master=self)
+        self.view_trans_screen = ViewTransactions(session, master=self)
         self.transactions_screen.pack_forget()
         self.view_trans_screen.pack()
 
