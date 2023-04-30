@@ -49,4 +49,5 @@ class HomeScreen(tk.Frame):
 
     def create_account_clicked(self):
         # Switch to account creation screen
+        self.no_user_label.pack_forget()
         self.master.switch_to_account_creation_screen()
