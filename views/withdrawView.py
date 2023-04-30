@@ -27,8 +27,15 @@ class WithdrawScreen(tk.Frame):
         submit_button = tk.Button(self, text="Submit", command=self.withdraw_submit_clicked)
         submit_button.pack(pady=5)
 
+        self.error_label = tk.Label(self, text="Enter a valid dollar amount!")
+
     def withdraw_submit_clicked(self):
-        # Switch to withdraw confirm screen
-        controller = withdrawController(self, self.session)
-        controller.submit_withdraw(round(Decimal(self.amount_entry.get()),2))
-        self.master.switch_to_withdraw_confirm_screen(self.session)
+        # validate input
+        entered_string = self.amount_entry.get()
+        if not (entered_string.isdecimal()):
+            self.error_label.pack(pady=10)
+        else:
+            # Switch to withdraw confirm screen
+            controller = withdrawController(self, self.session)
+            controller.submit_withdraw(round(Decimal(self.amount_entry.get()),2))
+            self.master.switch_to_withdraw_confirm_screen(self.session)

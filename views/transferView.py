@@ -23,7 +23,14 @@ class TransferScreen(tk.Frame):
         submit_button = tk.Button(self, text="Submit", command=self.transfer_submit_clicked)
         submit_button.pack(pady=10)
 
+        self.error_label = tk.Label(self, text="Enter a valid dollar amount!")
+
     def transfer_submit_clicked(self):
-        controller = transferBalanceController(self, self.session)
-        controller.transferBalance(round(Decimal(self.amount_entry.get()),2))
-        self.master.switch_to_transfer_confirm_screen(self.session)
+        # validate input
+        entered_string = self.amount_entry.get()
+        if not (entered_string.isdecimal()):
+            self.error_label.pack(pady=10)
+        else:
+            controller = transferBalanceController(self, self.session)
+            controller.transferBalance(round(Decimal(self.amount_entry.get()),2))
+            self.master.switch_to_transfer_confirm_screen(self.session)

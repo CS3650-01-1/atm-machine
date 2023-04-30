@@ -31,10 +31,7 @@ class DepositScreen(tk.Frame):
     def submit_deposit(self):
         # validate input
         entered_string = self.amount_entry.get()
-        # this validation has two conditions
-        # the first one makes sure the string is a decimal number
-        # the second ensures that the entered string either doesn't have a decimal point or has less than two digits after the decimal point
-        if not (entered_string.isdecimal() and (len(entered_string.split('.')) < 2 or len(entered_string.split('.')[1]) > 2)):
+        if not (entered_string.isdecimal()):
             self.error_label.pack(pady=10)
         else:
             depo = depositController(self, self.session)
