@@ -41,7 +41,8 @@ class TransferScreen(tk.Frame):
                 raise InvalidOperation
             decimalEntry = Decimal(entered_string)
             controller = transferBalanceController(self, self.session)
-            controller.transferBalance(decimalEntry)
+            if(controller.transferBalance(decimalEntry) is False):
+                raise InvalidOperation
             self.master.switch_to_transfer_confirm_screen(self.session)
         except InvalidOperation:
             self.error_label.pack_forget()
