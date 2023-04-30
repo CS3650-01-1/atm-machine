@@ -22,7 +22,13 @@ class TransferScreen(tk.Frame):
         # Create a submit button
         submit_button = tk.Button(self, text="Submit", command=self.transfer_submit_clicked)
         submit_button.pack(pady=10)
-        
+
+        self.back_button = tk.Button(self, text="Back", command=self.back_button_pressed)
+        self.back_button.pack(side="bottom", pady=5)
+
+    def back_button_pressed(self):
+        self.master.switch_to_trans_screen(self, self.session)
+
     def transfer_submit_clicked(self):
         # validate input
         entered_string = self.amount_entry.get()

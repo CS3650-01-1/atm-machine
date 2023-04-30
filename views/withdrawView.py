@@ -29,6 +29,13 @@ class WithdrawScreen(tk.Frame):
 
         self.error_label = tk.Label(self, text="Enter a valid dollar amount!")
 
+        self.back_button = tk.Button(self, text="Back", command=self.back_button_pressed)
+        self.back_button.pack(side="bottom", pady=5)
+
+    def back_button_pressed(self):
+        self.master.switch_to_trans_screen(self, self.session)
+
+
     def withdraw_submit_clicked(self):
         # validate input
         entered_string = self.amount_entry.get()
