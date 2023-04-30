@@ -13,9 +13,10 @@ DATABASE = "atm.db"
 
 class ATM:
     def __init__(self, atm_id, location, cash_available):
-        self.atm_id = atm_id
-        self.location = location
-        self.cash_available = cash_available
+        # self.atm_id = atm_id
+        # self.location = location
+        # self.cash_available = cash_available
+        pass
 
     def create_in_db(self):
         connection = sqlite3.connect(DATABASE)
@@ -116,3 +117,9 @@ class ATM:
         transaction = Transaction(type, amount, account_id, specific_id, account_type)
         transaction.create_in_db()
 
+    def get_all_transactions(self, specific_id):
+        connection = sqlite3.connect(DATABASE)
+        cursor = connection.cursor()
+        data = cursor.execute("SELECT * FROM TRANSACTIONS WHERE specificID = ?", [specific_id]).fetchall()
+
+        return data

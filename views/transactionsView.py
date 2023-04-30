@@ -28,6 +28,9 @@ class Transactions(tk.Frame):
         self.transfer_button = tk.Button(self, text="Transfer", command=self.transfer_clicked)
         self.transfer_button.pack(pady=5)
 
+        # Create View Transactions button
+        self.view_trans_button = tk.Button(self, text="View Transactions", command=self.view_trans_clicked)
+
     def check_balance_clicked(self):
         # Switch to check balance screen
         self.master.switch_to_check_balance_screen(self.session)
@@ -42,3 +45,6 @@ class Transactions(tk.Frame):
     def transfer_clicked(self):
         # Switch to transfer screen
         self.master.switch_to_transfer_screen(self.session)     
+
+    def view_trans_clicked(self):
+        self.master.switch_to_view_trans_screen(self.session)
