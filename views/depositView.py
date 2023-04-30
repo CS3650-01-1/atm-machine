@@ -25,14 +25,24 @@ class DepositScreen(tk.Frame):
         submit_button = tk.Button(self, text="Deposit", command=self.submit_deposit)
         submit_button.pack(pady=10)
 
+        self.error_label = tk.Label(self, text="Enter a valid dollar amount!")
+
 
     def submit_deposit(self):
-        depo = depositController(self, self.session)
+        # validate input
+        entered_string = self.amount_entry.get()
+        # this validation has two conditions
+        # the first one makes sure the string is a decimal number
+        # the second ensures that the entered string either doesn't have a decimal point or has less than two digits after the decimal point
+        if not (entered_string.isdecimal() and (len(entered_string.split('.')) < 2 or len(entered_string.split('.')[1]) > 2)):
+            self.error_label.pack(pady=10)
+        else:
+            depo = depositController(self, self.session)
         # convert the entered string to a Decimal object, and then rounds it to two decimal places;
         # then pass the value to the controller
-        depo.submit_deposit(round(Decimal(self.amount_entry.get()),2))
-        #Go back to home screen
-        self.master.switch_to_deposit_confirmation_screen(self.session)
+            depo.submit_deposit(round(Decimal(self.amount_entry.get()),2))
+            #Go back to home screen
+            self.master.switch_to_deposit_confirmation_screen(self.session)
 
 
 
