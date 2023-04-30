@@ -73,4 +73,4 @@ class AccountCreationScreen(tk.Frame):
             label.pack_forget()
         
     def back_button_clicked(self):
-        self.master.switch_to_home_view()
+        self.master.switch_to_home_view(self)

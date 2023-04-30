@@ -19,6 +19,10 @@ class UserAccounts(tk.Frame):
         self.savings_account_button = tk.Button(self, text="College\nSavings\nAccount", command=self.college_savings_clicked)
         self.savings_account_button.pack(pady=10)
 
+        # Create log out button
+        self.log_out_button = tk.Button(self, text="Log Out", command=self.log_out_button_clicked)
+        self.log_out_button.pack(pady=10)
+
     def college_checking_clicked(self):
         # Switch to transactions screen
         self.session.accountType = "checking"
@@ -27,3 +31,6 @@ class UserAccounts(tk.Frame):
     def college_savings_clicked(self):
         self.session.accountType = "savings"
         self.master.switch_to_transactions_screen(self.session)
+
+    def log_out_button_clicked(self):
+        self.master.switch_to_home_view(self)

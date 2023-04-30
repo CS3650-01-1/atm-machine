@@ -32,6 +32,10 @@ class Transactions(tk.Frame):
         self.view_trans_button = tk.Button(self, text="View Transactions", command=self.view_trans_clicked)
         self.view_trans_button.pack(pady=5)
 
+        # Create log out button
+        self.log_out_button = tk.Button(self, text="Log Out", command=self.log_out_button_clicked)
+        self.log_out_button.pack(pady=10)
+
     def check_balance_clicked(self):
         # Switch to check balance screen
         self.master.switch_to_check_balance_screen(self.session)
@@ -49,3 +53,6 @@ class Transactions(tk.Frame):
 
     def view_trans_clicked(self):
         self.master.switch_to_view_trans_screen(self.session)
+
+    def log_out_button_clicked(self):
+        self.master.switch_to_home_view(self)
