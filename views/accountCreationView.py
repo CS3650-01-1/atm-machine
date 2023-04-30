@@ -1,12 +1,11 @@
 import tkinter as tk
-from controllers import accountCreationController
+from controllers.accountCreationController import AccountCreationController
 
 class AccountCreationScreen(tk.Frame):
     def __init__(self, master=None):
         super().__init__(master)
         self.master = master
         self.create_widgets()
-        self.error_labels = []
 
     def create_widgets(self):
         # Create account creation labels 
@@ -52,6 +51,7 @@ class AccountCreationScreen(tk.Frame):
         # create error labels
         self.username_taken_error_label = tk.Label(self, text="Username is taken!")
         self.invalid_field_inputs_error_label = tk.Label(self, text="One or more fields have invalid content!")
+        self.error_labels = []
         self.error_labels.append(self.username_taken_error_label)
         self.error_labels.append(self.invalid_field_inputs_error_label)
 
@@ -61,8 +61,8 @@ class AccountCreationScreen(tk.Frame):
 
     def submit_clicked(self):
         # Switch to password creation screen
-        accountCreationController.submit_account(self.full_name_entry.get(),self.username_entry.get(), self.password_entry.get(), self.email_entry.get(), self.phone_num_entry.get(), self.physical_address_entry.get())
-        self.master.switch_to_home_view()
+        controller = AccountCreationController(self)
+        controller.submit_account(self.full_name_entry.get(),self.username_entry.get(), self.password_entry.get(), self.email_entry.get(), self.phone_num_entry.get(), self.physical_address_entry.get())
     
     def hide_error_labels(self):
         for label in self.error_labels:
