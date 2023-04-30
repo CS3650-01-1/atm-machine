@@ -42,6 +42,12 @@ class MainApp(tk.Tk):
         self.user_accounts_screen.pack_forget()
         self.transactions_screen.pack()
 
+    # This is much cleaner and we should probably make all transitions like this reduce clutter
+    def switch_to_trans_screen(self, view, session):
+        self.transactions_screen = Transactions(session, master=self)
+        view.pack_forget()
+        self.transactions_screen.pack()
+
     def switch_to_view_trans_screen(self, session):
         self.view_trans_screen = ViewTransactions(session, master=self)
         self.transactions_screen.pack_forget()
