@@ -35,12 +35,14 @@ class TransferScreen(tk.Frame):
     def transfer_submit_clicked(self):
         # validate input
         entered_string = self.amount_entry.get()
-        if not (entered_string.isdecimal()):
-            self.error_label.pack(pady=10)
-        else:
+        try:
+            if '.' in entered_string and len(entered_string.split('.')[1]) > 2:
+                print(entered_string.split('.')[1])
+                raise InvalidOperation
+            decimalEntry = Decimal(entered_string)
             controller = transferBalanceController(self, self.session)
-            if(controller.transferBalance(round(Decimal(self.amount_entry.get()),2))):
-                self.master.switch_to_transfer_confirm_screen(self.session)
-            else:
-                self.error_label = tk.Label(self, text="Insufficient funds or invalid input! Please try a different amount.")
-                self.error_label.pack(pady=10)
+            controller.transferBalance(decimalEntry)
+            self.master.switch_to_transfer_confirm_screen(self.session)
+        except InvalidOperation:
+            self.error_label.pack_forget()
+            self.error_label.pack(pady=10)
