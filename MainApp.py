@@ -47,6 +47,11 @@ class MainApp(tk.Tk):
         self.transactions_screen.pack_forget()
         self.view_trans_screen.pack()
 
+    def switch_to_transaction_from_view_screen(self, session):
+        self.transactions_screen = Transactions(session, master=self)
+        self.view_trans_screen.pack_forget()
+        self.transactions_screen.pack()
+
     def switch_to_deposit_screen(self, session):
         # Switch to deposit screen 
         self.deposit_screen = DepositScreen(session, master=self)
