@@ -58,15 +58,15 @@ class MainApp(tk.Tk):
         self.transactions_screen.pack_forget()
         self.deposit_screen.pack()
 
-    def switch_to_deposit_confirmation_screen(self):
+    def switch_to_deposit_confirmation_screen(self, session):
         # Switch to deposit confirmation screen
-        self.deposit_confirmation_screen = DepositCreationScreen(self)
+        self.deposit_confirmation_screen = DepositCreationScreen(session, master=self)
         self.deposit_screen.pack_forget()
         self.deposit_confirmation_screen.pack()
     
-    def switch_to_user_accounts_from_deposit_screen(self):
+    def switch_to_user_accounts_from_deposit_screen(self, session):
         # Switch to user accounts screen from deposit screen
-        self.user_accounts_screen = UserAccounts(self)
+        self.user_accounts_screen = UserAccounts(session, master = self)
         self.deposit_confirmation_screen.pack_forget()
         self.user_accounts_screen.pack()
     
@@ -159,9 +159,9 @@ class MainApp(tk.Tk):
         self.transactions_screen.pack_forget()
         self.check_balance_screen.pack()
 
-    def switch_to_user_accounts_from_check_balance_screen(self):
+    def switch_to_user_accounts_from_check_balance_screen(self, session):
         # Switch to user accounts screen from transfer confirmation screen
-        self.user_accounts_screen = UserAccounts(self)
+        self.user_accounts_screen = UserAccounts(session, master=self)
         self.check_balance_screen.pack_forget()
         self.user_accounts_screen.pack()
 

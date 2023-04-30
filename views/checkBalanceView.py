@@ -33,7 +33,7 @@ class CheckBalance(tk.Frame):
 
     def yes_clicked(self):
        # Switch to accounts screen
-       self.master.switch_to_user_accounts_from_check_balance_screen()  
+       self.master.switch_to_user_accounts_from_check_balance_screen(self.session)  
 
     def no_clicked(self):
         # Switch to home screen

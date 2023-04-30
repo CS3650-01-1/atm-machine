@@ -23,11 +23,11 @@ class WithdrawScreen(tk.Frame):
         self.amount_entry.pack(side="left")
 
         # Create submit button
-        self.submit_button = tk.Button(self, text="Submit", command=self.withdraw_submit_clicked)
-        self.submit_button.pack(pady=5)
+        submit_button = tk.Button(self, text="Submit", command=self.withdraw_submit_clicked)
+        submit_button.pack(pady=5)
 
     def withdraw_submit_clicked(self):
         # Switch to withdraw confirm screen
         controller = withdrawController(self, self.session)
         controller.submit_withdraw(int(self.amount_entry.get()))
-        self.master.switch_to_withdraw_confirm_screen()
+        self.master.switch_to_withdraw_confirm_screen(self.session)
