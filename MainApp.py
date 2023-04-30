@@ -111,9 +111,9 @@ class MainApp(tk.Tk):
         self.confirm_creation_screen.pack_forget()
         self.user_accounts_screen.pack()
 
-    def switch_to_user_accounts_from_withdraw_screen(self):
+    def switch_to_user_accounts_from_withdraw_screen(self, session):
         # Switch to user accounts screen from withdraw confirmation screen
-        self.user_accounts_screen = UserAccounts(self)
+        self.user_accounts_screen = UserAccounts(session, master=self)
         self.withdraw_confirm_screen.pack_forget()
         self.user_accounts_screen.pack()
 
@@ -130,9 +130,9 @@ class MainApp(tk.Tk):
         self.transfer_screen.pack_forget()
         self.transfer_confirm_screen.pack()
     
-    def switch_to_user_accounts_from_transfer_screen(self):
+    def switch_to_user_accounts_from_transfer_screen(self, session):
         # Switch to user accounts screen from transfer confirmation screen
-        self.user_accounts_screen = UserAccounts(self)
+        self.user_accounts_screen = UserAccounts(session, master=self)
         self.transfer_confirm_screen.pack_forget()
         self.user_accounts_screen.pack()
 

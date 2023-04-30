@@ -8,7 +8,7 @@ class ConfirmTransferScreen(tk.Frame):
 
     def create_widgets(self):
         # Create welcome label
-        self.welcome_label = tk.Label(self, text="Congratulations!\nAmount sucessfully transfered!", font=("Arial", 24))
+        self.welcome_label = tk.Label(self, text="Success!\nAmount sucessfully transfered!", font=("Arial", 24))
         self.welcome_label.pack(side="top", pady=10)
 
         # Create actions labbel
@@ -29,4 +29,4 @@ class ConfirmTransferScreen(tk.Frame):
 
     def no_clicked(self):
         # Switch to home screen
-        self.master.switch_to_home_screen_from_transfer(self.session)
+        self.master.switch_to_home_screen_from_transfer()
