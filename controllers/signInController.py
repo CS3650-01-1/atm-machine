@@ -15,8 +15,7 @@ class signInController:
         data = cursor.execute("SELECT * FROM ACCOUNT WHERE username = ?", [username]).fetchone()
 
         if data is None:
-            no_user_label = tk.Label( text = "Incorrect username or password")  # this doesnt check password but for security sake it lies
-            no_user_label.pack(pady=5)
+            self.view.no_user_label.pack(pady=5)
         elif (password == data[3]):
             # Initializes session with account data
             self.session.accountID = data[0]

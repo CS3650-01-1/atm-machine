@@ -38,6 +38,9 @@ class HomeScreen(tk.Frame):
         self.create_account_button = tk.Button(self, text="Create account", command=lambda: [self.create_account_clicked()])
         self.create_account_button.pack(pady=5)
 
+        
+        self.no_user_label = tk.Label( text = "Incorrect username or password")  # this doesnt check password but for security sake it lies
+
     def signin_clicked(self):
         #Switch to user accounts screen
         session = Session()
