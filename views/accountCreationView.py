@@ -6,6 +6,7 @@ class AccountCreationScreen(tk.Frame):
         super().__init__(master)
         self.master = master
         self.create_widgets()
+        self.error_labels = []
 
     def create_widgets(self):
         # Create account creation labels 
@@ -48,13 +49,22 @@ class AccountCreationScreen(tk.Frame):
         self.physical_address_entry = tk.Entry(self)
         self.physical_address_entry.pack()
 
+        # create error labels
+        self.username_taken_error_label = tk.Label(self, text="Username is taken!")
+        self.invalid_field_inputs_error_label = tk.Label(self, text="One or more fields have invalid content!")
+        self.error_labels.append(self.username_taken_error_label)
+        self.error_labels.append(self.invalid_field_inputs_error_label)
+
         # Create submit label and button
         self.submit_button = tk.Button(self, text="Submit", command=self.submit_clicked)
         self.submit_button.pack(pady=5)
 
     def submit_clicked(self):
         # Switch to password creation screen
-
-
         accountCreationController.submit_account(self.full_name_entry.get(),self.username_entry.get(), self.password_entry.get(), self.email_entry.get(), self.phone_num_entry.get(), self.physical_address_entry.get())
         self.master.switch_to_home_view()
+    
+    def hide_error_labels(self):
+        for label in self.error_labels:
+            label.pack_forget()
+        
