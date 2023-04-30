@@ -45,7 +45,8 @@ class WithdrawScreen(tk.Frame):
                 raise InvalidOperation
             decimalEntry = Decimal(entered_string)
             controller = withdrawController(self, self.session)
-            controller.submit_withdraw(decimalEntry)
+            if(controller.submit_withdraw(decimalEntry) is False):
+                raise InvalidOperation
             self.master.switch_to_withdraw_confirm_screen(self.session)
         except InvalidOperation:
             self.error_label.pack_forget()
