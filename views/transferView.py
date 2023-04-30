@@ -26,4 +26,3 @@ class TransferScreen(tk.Frame):
         controller = transferBalanceController(self, self.session)
         controller.transferBalance(int(self.amount_entry.get()))
         self.master.switch_to_transfer_confirm_screen(self.session)
-
