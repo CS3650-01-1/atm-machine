@@ -9,6 +9,8 @@ from .checkingsModel import *
 from .savingsModel import *
 from .transaction import *
 
+from decimal import *
+
 DATABASE = "atm.db"
 
 class ATM:
@@ -60,7 +62,7 @@ class ATM:
             account.update_db()
         # self.cash_available += amount
         #self.update_db()
-        self.log_transaction(self, "deposit", amount, specific_id, account_id, account_type)
+        self.log_transaction(self, "deposit", str(amount), specific_id, account_id, account_type)
 
     # we can probably get rid of this and just make a catch-all deposit method
     def deposit_check(self, amount, specific_id, account_id, account_type):
@@ -72,7 +74,7 @@ class ATM:
             account = Savings.retrieve(specific_id)
             account.addBalance(amount)
             account.update_db()
-        self.log_transaction("deposit", amount, specific_id, account_id, account_type)
+        self.log_transaction("deposit", str(amount), specific_id, account_id, account_type)
 
     def withdraw_cash(self, amount, specific_id, account_id, account_type):
         if account_type == "checking":
@@ -86,7 +88,7 @@ class ATM:
             account.update_db()
            # self.cash_available -= amount
         #self.update_db()
-        self.log_transaction(self, "withdraw", amount, specific_id, account_id, account_type)
+        self.log_transaction(self, "withdraw", str(amount), specific_id, account_id, account_type)
 
     def transfer_balance(self, amount, source_id, destination_id, account_id, account_type):
         # deny transfer if not enough balance
@@ -100,7 +102,7 @@ class ATM:
             destination_account = Checking.retrieve(destination_id)
             source_account.removeBalance(amount)
             destination_account.addBalance(amount)
-        self.log_transaction(self, "Transfer", amount, source_id, account_id, account_type)
+        self.log_transaction(self, "Transfer", str(amount), source_id, account_id, account_type)
 
     def check_balance(self, specific_id, account_type):
         if account_type == "checking":
