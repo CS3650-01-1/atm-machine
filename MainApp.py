@@ -113,10 +113,10 @@ class MainApp(tk.Tk):
         # Switch to password creation screen
         self.account_creation_screen.pack_forget()
         self.password_creation_screen.pack()
-        self.confirm_creation_screen = ConfirmCreationScreen(self)
 
-    def switch_to_confirmation_screen(self):
+    def switch_to_confirmation_screen(self, username, password):
         # Switch to password confirm screen
+        self.confirm_creation_screen = ConfirmCreationScreen(username, password, master=self)
         self.password_creation_screen.pack_forget()
         self.confirm_creation_screen.pack()
 
@@ -127,9 +127,9 @@ class MainApp(tk.Tk):
         self.account_creation_screen = AccountCreationScreen(self)
         self.home_screen.pack()
 
-    def switch_to_user_accounts_from_password_screen(self):
+    def switch_to_user_accounts_from_password_screen(self, session):
         # Switch to user accounts screen from password confirmation screen
-        self.user_accounts_screen = UserAccounts(self)
+        self.user_accounts_screen = UserAccounts(session, master=self)
         self.confirm_creation_screen.pack_forget()
         self.user_accounts_screen.pack()
 
@@ -189,9 +189,9 @@ class MainApp(tk.Tk):
         self.account_creation_screen = AccountCreationScreen(self)
         self.home_screen.pack()
     
-    def switch_to_confirmation_from_creation_view(self, view):
+    def switch_to_confirmation_from_creation_view(self, view, username, password):
         view.pack_forget()
-        self.confirm_creation_screen = ConfirmCreationScreen(self)
+        self.confirm_creation_screen = ConfirmCreationScreen(username, password, master=self)
         self.confirm_creation_screen.pack()
 
 app = MainApp()

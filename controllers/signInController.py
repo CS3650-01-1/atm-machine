@@ -22,5 +22,6 @@ class signInController:
             self.session.savingsID = cursor.execute("SELECT savingID FROM SAVING WHERE accountNum = ?", [self.session.accountID]).fetchone()[0]
             self.session.checkingID = cursor.execute("SELECT checkingID FROM CHECKING WHERE accountNum = ?", [self.session.accountID]).fetchone()[0]
             print(self.session)
-            self.view.no_user_label.pack_forget()
-            self.view.master.switch_to_user_accounts_screen(self.session)
+            if self.view.no_user_label is not None:
+                self.view.no_user_label.pack_forget()
+            self.view.master.switch_to_user_accounts_view(self.view, self.session)
