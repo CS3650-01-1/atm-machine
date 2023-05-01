@@ -54,27 +54,18 @@ class ATM:
     def deposit_cash(self, amount, specific_id, account_id, account_type):
         if account_type == "checking":
             account = Checking.retrieve(specific_id)
-            account.addBalance(amount)
+            if(account.addBalance(amount) is False):
+                return False
             account.update_db()
         elif account_type == "savings":
             account = Savings.retrieve(specific_id)
-            account.addBalance(amount)
+            if(account.addBalance(amount) is False):
+                return False
             account.update_db()
         # self.cash_available += amount
         #self.update_db()
         self.log_transaction(self, "DEPOSIT", str(amount), specific_id, account_id, account_type)
-
-    # we can probably get rid of this and just make a catch-all deposit method
-    def deposit_check(self, amount, specific_id, account_id, account_type):
-        if account_type == "checking":
-            account = Checking.retrieve(specific_id)
-            account.addBalance(amount)
-            account.update_db()
-        elif account_type == "savings":
-            account = Savings.retrieve(specific_id)
-            account.addBalance(amount)
-            account.update_db()
-        self.log_transaction("DEPOSIT", str(amount), specific_id, account_id, account_type)
+        return True
 
     def withdraw_cash(self, amount, specific_id, account_id, account_type):
         if account_type == "checking":

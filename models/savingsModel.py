@@ -46,8 +46,12 @@ class Savings:
         connection.commit()
 
     def addBalance(self, amount):
-        self.accountBalance += amount
-        self.update_db()
+        if amount > 0:
+            self.accountBalance += amount
+            self.update_db()
+            return True
+        else:
+            return False
 
     def removeBalance(self, amount):
         if self.accountBalance >= amount:

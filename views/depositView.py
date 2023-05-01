@@ -42,7 +42,8 @@ class DepositScreen(tk.Frame):
                 raise InvalidOperation
             decimalEntry = Decimal(entered_string)
             depo = depositController(self, self.session)
-            depo.submit_deposit(decimalEntry)
+            if(depo.submit_deposit(decimalEntry) is False):
+                raise InvalidOperation
             self.master.switch_to_deposit_confirmation_screen(self.session)
         except InvalidOperation:
             self.error_label.pack_forget()
